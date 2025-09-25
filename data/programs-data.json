@@ -1,0 +1,77 @@
+{
+  "programs": {
+    "yoga-as-sport": {
+      "title": "Yoga as Sport",
+      "icon": "fas fa-medal",
+      "description": "Competitive yoga training for tournaments and championships",
+      "content": "Yoga has evolved beyond a mere spiritual and physical practice to become a recognized competitive sport.",
+      "highlight": "We are the only academy in the region with certified competitive yoga judges.",
+      "status": "active",
+      "lastUpdated": "Today"
+    },
+    "corporate-yoga": {
+      "title": "Corporate Yoga",
+      "icon": "fas fa-briefcase", 
+      "description": "Workplace wellness programs for stress management",
+      "content": "Modern workplaces face unprecedented stress levels affecting employee productivity.",
+      "highlight": "We provide on-site corporate training with measurable wellness outcomes.",
+      "status": "active",
+      "lastUpdated": "Today"
+    },
+    "yoga-for-sport": {
+      "title": "Yoga for Sport",
+      "icon": "fas fa-running",
+      "description": "Enhance athletic performance with yoga techniques", 
+      "content": "Athletic performance optimization through yoga is scientifically proven.",
+      "highlight": "We combine ancient yoga wisdom with modern sports science.",
+      "status": "active",
+      "lastUpdated": "Today"
+    },
+    "women-wellness": {
+      "title": "Women Wellness",
+      "icon": "fas fa-female",
+      "description": "Specialized programs for women's health issues",
+      "content": "Women face unique physiological challenges throughout their lives.",
+      "highlight": "Our programs are designed specifically for women's unique health challenges.",
+      "status": "active", 
+      "lastUpdated": "Today"
+    },
+    "prenatal-postnatal": {
+      "title": "Prenatal & Postnatal",
+      "icon": "fas fa-baby",
+      "description": "Yoga for expecting and new mothers",
+      "content": "Pregnancy and childbirth represent profound transformations.",
+      "highlight": "We provide comprehensive support for the entire journey from pregnancy through early motherhood.",
+      "status": "active",
+      "lastUpdated": "Today"
+    },
+    "adolescence": {
+      "title": "Adolescence", 
+      "icon": "fas fa-user-graduate",
+      "description": "Yoga for teenagers dealing with hormonal changes",
+      "content": "Teenagers face complex hormonal, physical, and emotional changes.",
+      "highlight": "We understand the unique challenges teenagers face and provide supportive guidance.",
+      "status": "active",
+      "lastUpdated": "Today"
+    },
+    "therapy": {
+      "title": "Therapy",
+      "icon": "fas fa-heartbeat",
+      "description": "Yoga as remedy for various health conditions",
+      "content": "Non-communicable diseases represent major health threats in modern society.",
+      "highlight": "We combine yoga therapy with medical expertise to provide comprehensive healing approaches.",
+      "status": "active",
+      "lastUpdated": "Today"
+    },
+    "tech-supported": {
+      "title": "Tech-supported Yoga",
+      "icon": "fas fa-microchip", 
+      "description": "Combining tradition with modern technology",
+      "content": "Innovation meets tradition in our tech-supported yoga programs.",
+      "highlight": "We are the first academy to successfully integrate AI and IoT technology with traditional yoga practices.",
+      "status": "active",
+      "lastUpdated": "Today"
+    }
+  },
+  "pages": {}
+}

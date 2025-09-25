@@ -28,6 +28,10 @@ class AdminPanel {
         setTimeout(() => {
             this.initImageManagement();
         }, 100);
+        
+        // Load actual data from the server
+        this.loadWellnessData();
+        this.loadCompanyData();
     }
 
     // Load program data from localStorage or initialize default data
@@ -1517,11 +1521,260 @@ class AdminPanel {
             // Reload image gallery if it exists
             this.loadImageGallery();
             
+            // Reload wellness and company data
+            this.loadWellnessData();
+            this.loadCompanyData();
+            
             this.showNotification('Data refreshed successfully!', 'success');
         } catch (error) {
             console.error('Refresh error:', error);
             this.showNotification('Failed to refresh data', 'error');
         }
+    }
+
+    // Load wellness assessment data from server
+    async loadWellnessData() {
+        try {
+            const response = await fetch('/api/wellness_data');
+            const result = await response.json();
+            
+            if (result.success) {
+                this.wellnessData = result.data;
+                this.updateWellnessDisplay();
+                this.updateStatistics();
+            } else {
+                console.error('Failed to load wellness data:', result.error);
+                this.showNotification('Failed to load wellness data', 'error');
+            }
+        } catch (error) {
+            console.error('Error loading wellness data:', error);
+            this.showNotification('Error loading wellness data', 'error');
+        }
+    }
+
+    // Load company registration data from server
+    async loadCompanyData() {
+        try {
+            const response = await fetch('/api/company_data');
+            const result = await response.json();
+            
+            if (result.success) {
+                this.companyData = result.data;
+                this.updateCompanyDisplay();
+                this.updateStatistics();
+            } else {
+                console.error('Failed to load company data:', result.error);
+                this.showNotification('Failed to load company data', 'error');
+            }
+        } catch (error) {
+            console.error('Error loading company data:', error);
+            this.showNotification('Error loading company data', 'error');
+        }
+    }
+
+    // Update wellness data display
+    updateWellnessDisplay() {
+        const tbody = document.getElementById('wellness-data-tbody');
+        if (!tbody) return;
+
+        if (!this.wellnessData || this.wellnessData.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="9">No wellness submissions found</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = this.wellnessData.map(submission => `
+            <tr>
+                <td>${submission.id}</td>
+                <td>${submission.name || 'N/A'}</td>
+                <td>${submission.email || 'N/A'}</td>
+                <td>${submission.mobile || 'N/A'}</td>
+                <td>${submission.company_code || 'N/A'}</td>
+                <td>${submission.designation || 'N/A'}</td>
+                <td class="score-cell ${this.getScoreClass(submission.total_score)}">${submission.total_score || 'N/A'}</td>
+                <td>${this.formatDate(submission.submission_date)}</td>
+                <td>
+                    <button class="btn-small btn-primary" onclick="viewWellnessDetails(${submission.id})">View</button>
+                    <button class="btn-small btn-secondary" onclick="exportSingleWellness(${submission.id})">Export</button>
+                </td>
+            </tr>
+        `).join('');
+
+        // Also update the overview table
+        const overviewTbody = document.getElementById('wellness-tbody');
+        if (overviewTbody) {
+            const recentSubmissions = this.wellnessData.slice(0, 5);
+            overviewTbody.innerHTML = recentSubmissions.map(submission => `
+                <tr>
+                    <td>${submission.name || 'N/A'}</td>
+                    <td>${submission.email || 'N/A'}</td>
+                    <td>${submission.company_code || 'N/A'}</td>
+                    <td class="score-cell ${this.getScoreClass(submission.total_score)}">${submission.total_score || 'N/A'}</td>
+                    <td>${this.formatDate(submission.submission_date)}</td>
+                    <td>
+                        <button class="btn-small btn-primary" onclick="viewWellnessDetails(${submission.id})">View</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+    }
+
+    // Update company data display
+    updateCompanyDisplay() {
+        const tbody = document.getElementById('company-data-tbody');
+        if (!tbody) return;
+
+        if (!this.companyData || this.companyData.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="9">No company registrations found</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = this.companyData.map(company => `
+            <tr>
+                <td>${company.id}</td>
+                <td>${company.company_name || 'N/A'}</td>
+                <td>${company.contact_person || 'N/A'}</td>
+                <td>${company.email || 'N/A'}</td>
+                <td>${company.phone || 'N/A'}</td>
+                <td>${company.employee_count || 'N/A'}</td>
+                <td>${company.industry || 'N/A'}</td>
+                <td><code>${company.company_code || 'N/A'}</code></td>
+                <td>${this.formatDate(company.created_date)}</td>
+            </tr>
+        `).join('');
+
+        // Also update the overview table
+        const overviewTbody = document.getElementById('company-tbody');
+        if (overviewTbody) {
+            const recentCompanies = this.companyData.slice(0, 5);
+            overviewTbody.innerHTML = recentCompanies.map(company => `
+                <tr>
+                    <td>${company.company_name || 'N/A'}</td>
+                    <td>${company.contact_person || 'N/A'}</td>
+                    <td>${company.email || 'N/A'}</td>
+                    <td>${company.employee_count || 'N/A'}</td>
+                    <td>${company.industry || 'N/A'}</td>
+                    <td>${this.formatDate(company.created_date)}</td>
+                </tr>
+            `).join('');
+        }
+    }
+
+    // Update statistics display
+    updateStatistics() {
+        const wellnessCount = document.getElementById('wellness-count');
+        const companyCount = document.getElementById('company-count');
+
+        if (wellnessCount) {
+            wellnessCount.textContent = this.wellnessData ? this.wellnessData.length : '0';
+        }
+
+        if (companyCount) {
+            companyCount.textContent = this.companyData ? this.companyData.length : '0';
+        }
+    }
+
+    // Get CSS class for score color coding
+    getScoreClass(score) {
+        if (!score) return '';
+        if (score >= 80) return 'score-high';
+        if (score >= 60) return 'score-medium';
+        return 'score-low';
+    }
+
+    // Format date for display
+    formatDate(dateString) {
+        if (!dateString) return 'N/A';
+        const date = new Date(dateString);
+        return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+    }
+
+    // Get color for score display
+    getScoreColor(score) {
+        if (!score) return '#666';
+        if (score >= 80) return '#28a745';
+        if (score >= 60) return '#ffc107';
+        return '#dc3545';
+    }
+
+    // Convert data to CSV format
+    convertToCSV(data, type) {
+        if (!data || data.length === 0) return '';
+
+        let headers = [];
+        let rows = [];
+
+        if (type === 'wellness') {
+            headers = ['ID', 'Name', 'Email', 'Mobile', 'Company Code', 'Designation', 'Total Score', 'Submission Date'];
+            rows = data.map(item => [
+                item.id || '',
+                item.name || '',
+                item.email || '',
+                item.mobile || '',
+                item.company_code || '',
+                item.designation || '',
+                item.total_score || '',
+                this.formatDate(item.submission_date)
+            ]);
+
+            // Add response headers
+            for (let i = 1; i <= 12; i++) {
+                headers.push(`Q${i}`);
+            }
+
+            // Add responses to rows
+            rows = rows.map((row, index) => {
+                const item = data[index];
+                for (let i = 1; i <= 12; i++) {
+                    row.push((item.responses && item.responses[`q${i}`]) || '');
+                }
+                return row;
+            });
+
+        } else if (type === 'company') {
+            headers = ['ID', 'Company Name', 'Contact Person', 'Email', 'Phone', 'Employee Count', 'Industry', 'Company Code', 'Registration Date'];
+            rows = data.map(item => [
+                item.id || '',
+                item.company_name || '',
+                item.contact_person || '',
+                item.email || '',
+                item.phone || '',
+                item.employee_count || '',
+                item.industry || '',
+                item.company_code || '',
+                this.formatDate(item.created_date)
+            ]);
+        }
+
+        // Escape CSV values
+        const escapeCSV = (value) => {
+            if (value === null || value === undefined) return '';
+            const stringValue = String(value);
+            if (stringValue.includes(',') || stringValue.includes('"') || stringValue.includes('\n')) {
+                return `"${stringValue.replace(/"/g, '""')}"`;
+            }
+            return stringValue;
+        };
+
+        const csvContent = [
+            headers.map(escapeCSV).join(','),
+            ...rows.map(row => row.map(escapeCSV).join(','))
+        ].join('\n');
+
+        return csvContent;
+    }
+
+    // Download CSV file
+    downloadCSV(csvContent, filename) {
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', filename);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
     }
 
     // Image management methods
@@ -1656,5 +1909,96 @@ function clearCache() {
 function refreshData() {
     if (window.adminPanel) {
         window.adminPanel.refreshData();
+    }
+}
+
+// Global functions for wellness data management
+function refreshWellnessData() {
+    if (window.adminPanel) {
+        window.adminPanel.loadWellnessData();
+    }
+}
+
+function refreshCompanyData() {
+    if (window.adminPanel) {
+        window.adminPanel.loadCompanyData();
+    }
+}
+
+function viewWellnessDetails(id) {
+    if (window.adminPanel && window.adminPanel.wellnessData) {
+        const submission = window.adminPanel.wellnessData.find(s => s.id === id);
+        if (submission) {
+            let detailsHtml = `
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+                    <h2>Wellness Assessment Details</h2>
+                    <hr style="margin: 15px 0;">
+                    
+                    <h3>Personal Information</h3>
+                    <p><strong>Name:</strong> ${submission.name || 'N/A'}</p>
+                    <p><strong>Email:</strong> ${submission.email || 'N/A'}</p>
+                    <p><strong>Mobile:</strong> ${submission.mobile || 'N/A'}</p>
+                    <p><strong>Designation:</strong> ${submission.designation || 'N/A'}</p>
+                    <p><strong>Company Code:</strong> ${submission.company_code || 'N/A'}</p>
+                    <p><strong>Total Score:</strong> <span style="font-weight: bold; color: ${window.adminPanel.getScoreColor(submission.total_score)}">${submission.total_score || 'N/A'}</span></p>
+                    <p><strong>Submission Date:</strong> ${window.adminPanel.formatDate(submission.submission_date)}</p>
+                    
+                    <h3>Assessment Responses</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 15px 0;">
+            `;
+            
+            if (submission.responses) {
+                for (let i = 1; i <= 12; i++) {
+                    const response = submission.responses[`q${i}`];
+                    if (response) {
+                        detailsHtml += `<div style="padding: 8px; background: #f5f5f5; border-radius: 4px;"><strong>Q${i}:</strong> ${response}</div>`;
+                    }
+                }
+            }
+            
+            detailsHtml += `
+                    </div>
+                </div>
+            `;
+            
+            const newWindow = window.open('', '_blank', 'width=800,height=600');
+            newWindow.document.write(detailsHtml);
+            newWindow.document.title = `Wellness Details - ${submission.name}`;
+        } else {
+            alert('Submission details not found.');
+        }
+    }
+}
+
+function exportWellnessData() {
+    if (window.adminPanel && window.adminPanel.wellnessData) {
+        const data = window.adminPanel.wellnessData;
+        const csv = window.adminPanel.convertToCSV(data, 'wellness');
+        window.adminPanel.downloadCSV(csv, 'wellness-data.csv');
+        window.adminPanel.showNotification('Wellness data exported successfully!', 'success');
+    } else {
+        alert('No wellness data to export.');
+    }
+}
+
+function exportCompanyData() {
+    if (window.adminPanel && window.adminPanel.companyData) {
+        const data = window.adminPanel.companyData;
+        const csv = window.adminPanel.convertToCSV(data, 'company');
+        window.adminPanel.downloadCSV(csv, 'company-data.csv');
+        window.adminPanel.showNotification('Company data exported successfully!', 'success');
+    } else {
+        alert('No company data to export.');
+    }
+}
+
+function exportSingleWellness(id) {
+    if (window.adminPanel && window.adminPanel.wellnessData) {
+        const submission = window.adminPanel.wellnessData.find(s => s.id === id);
+        if (submission) {
+            const csv = window.adminPanel.convertToCSV([submission], 'wellness');
+            window.adminPanel.downloadCSV(csv, `wellness-${submission.name || id}.csv`);
+            window.adminPanel.showNotification('Individual wellness data exported!', 'success');
+        }
     }
 }

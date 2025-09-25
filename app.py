@@ -6,6 +6,7 @@ app = Flask(__name__)
 # --- CONFIGURATION FOR SQLITE ---
 # Using SQLite database for local development
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///corporate_wellness.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/yakkai_neri_db' // use this for mysql
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # -----------------------------------
 
@@ -56,6 +57,11 @@ with app.app_context():
 # Route to render the main corporate yoga page
 @app.route("/")
 def home():
+    return render_template("index.html")
+
+# Route to render the corporate yoga form
+@app.route("/corporate-yoga")
+def corporate_yoga():
     return render_template("corporate-yoga.html", company_code="ABC123")
 
 # Route to serve the wellness form for individuals
@@ -107,6 +113,182 @@ def submit_wellness(company_code):
 @app.route("/submission_success")
 def submission_success():
     return render_template("submission-success.html")
+
+# Route to render admin panel
+@app.route("/admin")
+def admin():
+    return render_template("admin.html")
+
+# Route to get all wellness submissions (for admin)
+@app.route("/api/wellness_data")
+def get_wellness_data():
+    try:
+        submissions = WellnessSubmission.query.all()
+        data = []
+        for submission in submissions:
+            data.append({
+                'id': submission.id,
+                'company_code': submission.company_code,
+                'name': submission.name,
+                'email': submission.email,
+                'mobile': submission.mobile,
+                'designation': submission.designation,
+                'total_score': submission.total_score,
+                'submission_date': submission.submission_date.strftime('%Y-%m-%d %H:%M:%S') if submission.submission_date else None,
+                'responses': {
+                    'q1': submission.q1, 'q2': submission.q2, 'q3': submission.q3,
+                    'q4': submission.q4, 'q5': submission.q5, 'q6': submission.q6,
+                    'q7': submission.q7, 'q8': submission.q8, 'q9': submission.q9,
+                    'q10': submission.q10, 'q11': submission.q11, 'q12': submission.q12
+                }
+            })
+        return {'success': True, 'data': data, 'count': len(data)}
+    except Exception as e:
+        return {'success': False, 'error': str(e)}, 500
+
+# Route to get all company registrations (for admin)
+@app.route("/api/company_data")
+def get_company_data():
+    try:
+        companies = Company.query.all()
+        data = []
+        for company in companies:
+            data.append({
+                'id': company.id,
+                'company_name': company.company_name,
+                'contact_person': company.contact_person,
+                'email': company.email,
+                'phone': company.phone,
+                'employee_count': company.employee_count,
+                'industry': company.industry,
+                'company_code': company.company_code,
+                'created_date': company.created_date.strftime('%Y-%m-%d %H:%M:%S') if company.created_date else None
+            })
+        return {'success': True, 'data': data, 'count': len(data)}
+    except Exception as e:
+        return {'success': False, 'error': str(e)}, 500
+
+# Route to serve static JSON data for admin panel
+@app.route("/data/programs-data.json")
+def get_programs_data():
+    # Return default program data structure
+    data = {
+        "programs": {
+            "yoga-as-sport": {
+                "title": "Yoga as Sport",
+                "icon": "fas fa-medal",
+                "description": "Competitive yoga training for tournaments and championships",
+                "content": "Yoga has evolved beyond a mere spiritual and physical practice to become a recognized competitive sport.",
+                "highlight": "We are the only academy in the region with certified competitive yoga judges.",
+                "status": "active",
+                "lastUpdated": "Today"
+            },
+            "corporate-yoga": {
+                "title": "Corporate Yoga",
+                "icon": "fas fa-briefcase",
+                "description": "Workplace wellness programs for stress management",
+                "content": "Modern workplaces face unprecedented stress levels affecting employee productivity.",
+                "highlight": "We provide on-site corporate training with measurable wellness outcomes.",
+                "status": "active",
+                "lastUpdated": "Today"
+            },
+            "yoga-for-sport": {
+                "title": "Yoga for Sport",
+                "icon": "fas fa-running",
+                "description": "Enhance athletic performance with yoga techniques",
+                "content": "Athletic performance optimization through yoga is scientifically proven.",
+                "highlight": "We combine ancient yoga wisdom with modern sports science.",
+                "status": "active",
+                "lastUpdated": "Today"
+            },
+            "women-wellness": {
+                "title": "Women Wellness",
+                "icon": "fas fa-female",
+                "description": "Specialized programs for women's health issues",
+                "content": "Women face unique physiological challenges throughout their lives.",
+                "highlight": "Our programs are designed specifically for women's unique health challenges.",
+                "status": "active",
+                "lastUpdated": "Today"
+            },
+            "prenatal-postnatal": {
+                "title": "Prenatal & Postnatal",
+                "icon": "fas fa-baby",
+                "description": "Yoga for expecting and new mothers",
+                "content": "Pregnancy and childbirth represent profound transformations.",
+                "highlight": "We provide comprehensive support for the entire journey from pregnancy through early motherhood.",
+                "status": "active",
+                "lastUpdated": "Today"
+            },
+            "adolescence": {
+                "title": "Adolescence",
+                "icon": "fas fa-user-graduate",
+                "description": "Yoga for teenagers dealing with hormonal changes",
+                "content": "Teenagers face complex hormonal, physical, and emotional changes.",
+                "highlight": "We understand the unique challenges teenagers face and provide supportive guidance.",
+                "status": "active",
+                "lastUpdated": "Today"
+            },
+            "therapy": {
+                "title": "Therapy",
+                "icon": "fas fa-heartbeat",
+                "description": "Yoga as remedy for various health conditions",
+                "content": "Non-communicable diseases represent major health threats in modern society.",
+                "highlight": "We combine yoga therapy with medical expertise to provide comprehensive healing approaches.",
+                "status": "active",
+                "lastUpdated": "Today"
+            },
+            "tech-supported": {
+                "title": "Tech-supported Yoga",
+                "icon": "fas fa-microchip",
+                "description": "Combining tradition with modern technology",
+                "content": "Innovation meets tradition in our tech-supported yoga programs.",
+                "highlight": "We are the first academy to successfully integrate AI and IoT technology with traditional yoga practices.",
+                "status": "active",
+                "lastUpdated": "Today"
+            }
+        },
+        "pages": {}
+    }
+    return data
+
+# Route to serve index.html directly
+@app.route("/index.html")
+def index_html():
+    return render_template("index.html")
+
+# Additional routes for various pages referenced in templates
+@app.route("/wellness.html")
+def wellness_html():
+    return render_template("wellness.html")
+
+@app.route("/therapy.html") 
+def therapy_html():
+    return render_template("therapy.html")
+
+@app.route("/women-seniors.html")
+def women_seniors_html():
+    return render_template("women-seniors.html")
+
+@app.route("/professional.html")
+def professional_html():
+    return render_template("professional.html")
+
+@app.route("/workshops.html")
+def workshops_html():
+    return render_template("Workshops.html")
+
+@app.route("/meet-the-trainer.html")
+def meet_trainer_html():
+    return render_template("meet-the-trainer.html")
+
+@app.route("/contact.html")
+def contact_html():
+    return render_template("contact.html")
+
+# Catch-all route for missing static files to prevent 404s
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template("index.html"), 200
 
 # Route to handle form submission for company registration
 @app.route("/submit_company", methods=["POST"])

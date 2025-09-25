@@ -4,54 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yakkai Neri Yoga Academy</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
-    
-    
 </head>
-<body class="min-h-screen flex flex-col">
+<body>
     <!-- Navigation -->
-    <nav class="fixed w-full bg-white bg-opacity-90 z-50 border-b border-gray-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <a href="index.html" class="text-2xl font-bold text-green-500">Yakkai Neri</a>
+    <nav class="navbar">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="{{ url_for('home') }}" class="logo">Yakkai Neri</a>
+            
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('home') }}" class="active">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">
+                        Courses <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="{{ url_for('wellness_html') }}" class="dropdown-item">Wellness Programs</a>
+                        <a href="{{ url_for('therapy_html') }}" class="dropdown-item">Therapy Programs</a>
+                        <a href="{{ url_for('women_seniors_html') }}" class="dropdown-item">Women & Senior Programs</a>
+                        <a href="{{ url_for('professional_html') }}" class="dropdown-item">Professional Training</a>
+                        <a href="{{ url_for('workshops_html') }}" class="dropdown-item">Workshops</a>
                     </div>
-                    <div class="hidden md:block">
-                        <div class="ml-10 flex items-baseline space-x-4">
-                            <a href="index.html" class="text-gray-700 hover:text-green-500 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Home</a>
-                            <div class="dropdown relative">
-                                <button class="text-green-500 px-3 py-2 rounded-md text-sm font-medium flex items-center focus:outline-none" aria-current="page">
-                                    Courses <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a href="wellness.html" class="dropdown-item">Wellness Programs</a>
-                                    <a href="therapy.html" class="dropdown-item">Therapy Programs</a>
-                                    <a href="women-seniors.html" class="dropdown-item">Women & Senior Programs</a>
-                                    <a href="professional.html" class="dropdown-item">Professional Training</a>
-                                    <a href="workshops.html" class="dropdown-item">Workshops</a>
-                                </div>
-                            </div>
-                            <a href="meet-the-trainer.html" class="text-gray-700 hover:text-green-500 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Meet The Trainer</a>
-                            <a href="index.html#contact" class="text-gray-700 hover:text-green-500 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Contact</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="hidden md:block">
-                    <a href="#contact" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-300">Join Now</a>
-                </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-700 hover:text-green-500 focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
+                </li>
+                <li><a href="{{ url_for('meet_trainer_html') }}">Meet The Trainer</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            
+            <a href="#contact" class="btn btn-primary">Join Now</a>
+            
+            <button class="mobile-menu-button" id="mobile-menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
         
         <!-- Mobile menu -->
@@ -64,30 +50,28 @@
                         </svg>
                     </button>
                 </div>
-                <div class="flex flex-col space-y-4 mt-8">
-                    <a href="index.html" class="text-white hover:text-green-500 px-3 py-2 rounded-md text-lg font-medium transition duration-300">Home</a>
+                <ul class="mobile-nav-menu">
+                    <li><a href="{{ url_for('home') }}" class="active">Home</a></li>
                     
                     <!-- Mobile Courses Dropdown -->
-                    <div>
-                        <button id="mobile-courses-toggle" class="text-green-500 px-3 py-2 rounded-md text-lg font-medium flex items-center w-full justify-between">
+                    <li class="mobile-dropdown">
+                        <button id="mobile-courses-toggle" class="mobile-dropdown-toggle">
                             <span>Courses</span>
-                            <svg id="mobile-courses-chevron" class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
+                            <i id="mobile-courses-chevron" class="fas fa-chevron-down"></i>
                         </button>
                         <div id="mobile-courses-menu" class="mobile-dropdown-menu">
-                            <a href="wellness.html" class="block text-white hover:text-green-500 px-3 py-2 rounded-md text-base font-medium transition duration-300">Wellness Programs</a>
-                            <a href="therapy.html" class="block text-white hover:text-green-500 px-3 py-2 rounded-md text-base font-medium transition duration-300">Therapy Programs</a>
-                            <a href="women-seniors.html" class="block text-white hover:text-green-500 px-3 py-2 rounded-md text-base font-medium transition duration-300">Women & Senior Programs</a>
-                            <a href="professional.html" class="block text-white hover:text-green-500 px-3 py-2 rounded-md text-base font-medium transition duration-300">Professional Training</a>
-                            <a href="workshops.html" class="block text-white hover:text-green-500 px-3 py-2 rounded-md text-base font-medium transition duration-300">Workshops</a>
+                            <a href="{{ url_for('wellness_html') }}">Wellness Programs</a>
+                            <a href="{{ url_for('therapy_html') }}">Therapy Programs</a>
+                            <a href="{{ url_for('women_seniors_html') }}">Women & Senior Programs</a>
+                            <a href="{{ url_for('professional_html') }}">Professional Training</a>
+                            <a href="{{ url_for('workshops_html') }}">Workshops</a>
                         </div>
-                    </div>
-                    <a href="meet-the-trainer.html" class="text-white hover:text-green-500 px-3 py-2 rounded-md text-lg font-medium transition duration-300">Meet The Trainer</a>
-                    <a href="index.html#contact" class="text-white hover:text-green-500 px-3 py-2 rounded-md text-lg font-medium transition duration-300">Contact</a>
-                </div>
-                <div class="mt-auto mb-8">
-                    <a href="#contact" class="block w-full bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-md text-center font-medium transition duration-300">Join Now</a>
+                    </li>
+                    <li><a href="{{ url_for('meet_trainer_html') }}">Meet The Trainer</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="mobile-cta">
+                    <a href="#contact" class="btn btn-primary btn-block">Join Now</a>
                 </div>
             </div>
         </div>
@@ -95,134 +79,168 @@
 
     <!-- Main Content -->
     <main class="flex-grow pt-16">
-        <!-- Home Section -->
-       <section id="home" class="relative min-h-screen flex items-center justify-center">
+    <!-- Home Section -->
+    <div class="mt-8 mb-8"></div>
+
+       <section id="home" class="hero-section">
     <!-- Banner Image -->
-    <img src="images/banner.jpg" 
+    <img src="{{ url_for('static', filename='images/banner.jpg') }}" 
          alt="Yoga Banner"
-        style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter: brightness(100%);">  
+         class="hero-background-image">
 
     <!-- Dark Overlay -->
-    <div class="absolute inset-0 bg-black bg-opacity-70"></div>
+    <div class="hero-overlay"></div>
 
     <!-- Content -->
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-        <div class="fade-in">
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">Yakkai Neri Yoga Academy</h1>
-            <p class="text-xl md:text-2xl text-white mb-8">Transform Your Life Through the Power of Yoga</p>
-            <a href="wellness.html" class="inline-block bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-md text-lg font-medium transition duration-300 transform hover:scale-105">
+    <div class="container">
+        <div class="hero-content fade-in">
+            <h1 class="hero-title">Yakkai Neri Yoga Academy</h1>
+            <p class="hero-subtitle">Transform Your Life Through the Power of Yoga</p>
+            <a href="{{ url_for('wellness_html') }}" class="btn btn-primary btn-lg">
                 Explore Courses
             </a>
         </div>
-    </div>  
+    </div>
 </section>
 
 
-<section id="topics" class="topics">
+<section id="programs" class="section programs-section">
     <div class="container">
-        <div class="section-title">
-            <h2>Our Programs</h2>
+        <div class="section-header text-center">
+            <h2 class="section-title">Our Programs</h2>
         </div>
-        <div class="topics-grid">
-            <div class="topic-card">
-                <div class="topic-icon">
-                    <i class="fas fa-medal"></i>
+        <div class="row g-4">
+            <!-- Each program card -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card program-card h-100">
+                    <div class="card-body text-center">
+                        <div class="program-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h3 class="card-title">Yoga as Sport</h3>
+                        <p class="card-text">Competitive yoga training for tournaments and championships</p>
+                        <a href="{{ url_for('yoga_sport_html') }}" class="btn btn-outline-primary">Read More</a>
+                    </div>
                 </div>
-                <h3>Yoga as Sport</h3>
-                <p>Competitive yoga training for tournaments and championships</p>
-                <a href="yoga-as-sport.html" class="read-more-btn">Read More</a>
             </div>
-            <div class="topic-card">
-                <div class="topic-icon">
-                    <i class="fas fa-briefcase"></i>
+            <div class="col-lg-4 col-md-6">
+                <div class="card program-card h-100">
+                    <div class="card-body text-center">
+                        <div class="program-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3 class="card-title">Corporate Yoga</h3>
+                        <p class="card-text">Workplace wellness programs for stress management</p>
+                        <a href="{{ url_for('corporate_yoga_html') }}" class="btn btn-outline-primary">Read More</a>
+                    </div>
                 </div>
-                <h3>Corporate Yoga</h3>
-                <p>Workplace wellness programs for stress management</p>
-                <a href="corporate-yoga.html" class="read-more-btn">Read More</a>
             </div>
-            <div class="topic-card">
-                <div class="topic-icon">
-                    <i class="fas fa-running"></i>
+            <div class="col-lg-4 col-md-6">
+                <div class="card program-card h-100">
+                    <div class="card-body text-center">
+                        <div class="program-icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <h3 class="card-title">Yoga for Sport</h3>
+                        <p class="card-text">Enhance athletic performance with yoga techniques</p>
+                        <a href="{{ url_for('yoga_for_sport_html') }}" class="btn btn-outline-primary">Read More</a>
+                    </div>
                 </div>
-                <h3>Yoga for Sport</h3>
-                <p>Enhance athletic performance with yoga techniques</p>
-                <a href="yoga-for-sport.html" class="read-more-btn">Read More</a>
             </div>
-            <div class="topic-card">
-                <div class="topic-icon">
-                    <i class="fas fa-female"></i>
+            <div class="col-lg-4 col-md-6">
+                <div class="card program-card h-100">
+                    <div class="card-body text-center">
+                        <div class="program-icon">
+                            <i class="fas fa-female"></i>
+                        </div>
+                        <h3 class="card-title">Women Wellness</h3>
+                        <p class="card-text">Specialized programs for women's health issues</p>
+                        <a href="{{ url_for('women_wellness_html') }}" class="btn btn-outline-primary">Read More</a>
+                    </div>
                 </div>
-                <h3>Women Wellness</h3>
-                <p>Specialized programs for women's health issues</p>
-                <a href="women-wellness.html" class="read-more-btn">Read More</a>
             </div>
-            <div class="topic-card">
-                <div class="topic-icon">
-                    <i class="fas fa-baby"></i>
+            <div class="col-lg-4 col-md-6">
+                <div class="card program-card h-100">
+                    <div class="card-body text-center">
+                        <div class="program-icon">
+                            <i class="fas fa-baby"></i>
+                        </div>
+                        <h3 class="card-title">Prenatal & Postnatal</h3>
+                        <p class="card-text">Yoga for expecting and new mothers</p>
+                        <a href="{{ url_for('prenatal_postnatal_html') }}" class="btn btn-outline-primary">Read More</a>
+                    </div>
                 </div>
-                <h3>Prenatal & Postnatal</h3>
-                <p>Yoga for expecting and new mothers</p>
-                <a href="prenatal & postnatal.html" class="read-more-btn">Read More</a>
             </div>
-            <div class="topic-card">
-                <div class="topic-icon">
-                    <i class="fas fa-user-graduate"></i>
+            <div class="col-lg-4 col-md-6">
+                <div class="card program-card h-100">
+                    <div class="card-body text-center">
+                        <div class="program-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3 class="card-title">Adolescence</h3>
+                        <p class="card-text">Yoga for teenagers dealing with hormonal changes</p>
+                        <a href="{{ url_for('adolescence_html') }}" class="btn btn-outline-primary">Read More</a>
+                    </div>
                 </div>
-                <h3>Adolescence</h3>
-                <p>Yoga for teenagers dealing with hormonal changes</p>
-                <a href="adolescence.html" class="read-more-btn">Read More</a>
             </div>
-            <div class="topic-card">
-                <div class="topic-icon">
-                    <i class="fas fa-heartbeat"></i>
+            <div class="col-lg-4 col-md-6">
+                <div class="card program-card h-100">
+                    <div class="card-body text-center">
+                        <div class="program-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3 class="card-title">Therapy</h3>
+                        <p class="card-text">Yoga as remedy for various health conditions</p>
+                        <a href="{{ url_for('therapy_html') }}" class="btn btn-outline-primary">Read More</a>
+                    </div>
                 </div>
-                <h3>Therapy</h3>
-                <p>Yoga as remedy for various health conditions</p>
-                <a href="thearpy_1.html" class="read-more-btn">Read More</a>
             </div>
-            <div class="topic-card">
-                <div class="topic-icon">
-                    <i class="fas fa-microchip"></i>
+            <div class="col-lg-4 col-md-6">
+                <div class="card program-card h-100">
+                    <div class="card-body text-center">
+                        <div class="program-icon">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <h3 class="card-title">Tech-supported Yoga</h3>
+                        <p class="card-text">Combining tradition with modern technology</p>
+                        <a href="{{ url_for('tech_yoga_html') }}" class="btn btn-outline-primary">Read More</a>
+                    </div>
                 </div>
-                <h3>Tech-supported Yoga</h3>
-                <p>Combining tradition with modern technology</p>
-                <a href="Tech-supported Yoga.html" class="read-more-btn">Read More</a>
             </div>
         </div>
     </div>
 </section>
 
-        <section id="contact" class="py-20 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16 fade-in">
-                    <h2 class="text-3xl md:text-4xl font-bold text-green-500 mb-4">Get In Touch</h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Ready to begin your yoga journey? Contact us for more information or to schedule a visit</p>
-                    <div class="w-20 h-1 bg-green-500 mx-auto mt-4"></div>
+        <section id="contact" class="section contact-section bg-light">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <p class="section-subtitle">Ready to begin your yoga journey? Contact us for more information or to schedule a visit</p>
                 </div>
                 
-                <div class="grid md:grid-cols-2 gap-12 fade-in">
-                    <div>
-                        <form id="contactForm" class="space-y-6">
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                                <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form id="contactForm" class="contact-form">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Full Name</label>
+                                <input type="text" id="name" name="name" class="form-control">
                                 <p id="name-error" class="error-message">Please enter your name</p>
                             </div>
                             
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                                <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" id="email" name="email" class="form-control">
                                 <p id="email-error" class="error-message">Please enter a valid email</p>
                             </div>
                             
-                            <div>
-                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="form-control">
                             </div>
                             
-                            <div>
-                                <label for="interest" class="block text-sm font-medium text-gray-700 mb-1">Interested In</label>
-                                <select id="interest" name="interest" class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800">
+                            <div class="form-group">
+                                <label for="interest" class="form-label">Interested In</label>
+                                <select id="interest" name="interest" class="form-control">
                                     <option value="">Select an option</option>
                                     <option value="wellness">Wellness Yoga</option>
                                     <option value="therapy">Therapeutic Yoga</option>
@@ -233,77 +251,77 @@
                                 </select>
                             </div>
                             
-                            <div>
-                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
-                                <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800"></textarea>
+                            <div class="form-group">
+                                <label for="message" class="form-label">Your Message</label>
+                                <textarea id="message" name="message" rows="4" class="form-control"></textarea>
                                 <p id="message-error" class="error-message">Please enter your message</p>
                             </div>
                             
-                            <div>
-                                <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-md font-medium transition duration-300">Send Message</button>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block">Send Message</button>
                             </div>
                         </form>
                     </div>
                     
-                    <div>
-                        <div class="bg-green-50 p-6 rounded-lg h-full border border-green-100">
-                            <h3 class="text-xl font-bold text-green-700 mb-6">Contact Information</h3>
+                    <div class="col-lg-6">
+                        <div class="contact-info">
+                            <h3 class="contact-info-title">Contact Information</h3>
                             
-                            <div class="space-y-6">
-                                <div class="flex items-start">
-                                    <div class="flex-shrink-0 bg-green-500 p-2 rounded-full mr-4">
-                                        <i class="fas fa-map-marker-alt text-white"></i>
+                            <div class="contact-info-items">
+                                <div class="contact-info-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
                                     </div>
                                     <div>
-                                        <h4 class="text-green-800 font-medium mb-1">Our Location</h4>
-                                        <p class="text-green-700">Coimbatore, Tamil Nadu<br>Near Hindusthan College of Arts and Science</p>
+                                        <h4>Our Location</h4>
+                                        <p>Coimbatore, Tamil Nadu<br>Near Hindusthan College of Arts and Science</p>
                                     </div>
                                 </div>
                                 
-                                <div class="flex items-start">
-                                    <div class="flex-shrink-0 bg-green-500 p-2 rounded-full mr-4">
-                                        <i class="fas fa-phone-alt text-white"></i>
+                                <div class="contact-info-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-phone-alt"></i>
                                     </div>
                                     <div>
-                                        <h4 class="text-green-800 font-medium mb-1">Call Us</h4>
-                                        <p class="text-green-700">+91 98765 43210<br>Mon-Sat: 8:00 AM - 8:00 PM</p>
+                                        <h4>Call Us</h4>
+                                        <p>+91 98765 43210<br>Mon-Sat: 8:00 AM - 8:00 PM</p>
                                     </div>
                                 </div>
                                 
-                                <div class="flex items-start">
-                                    <div class="flex-shrink-0 bg-green-500 p-2 rounded-full mr-4">
-                                        <i class="fas fa-envelope text-white"></i>
+                                <div class="contact-info-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-envelope"></i>
                                     </div>
                                     <div>
-                                        <h4 class="text-green-800 font-medium mb-1">Email Us</h4>
-                                        <p class="text-green-700">info@yakkaineri.com<br>support@yakkaineri.com</p>
+                                        <h4>Email Us</h4>
+                                        <p>info@yakkaineri.com<br>support@yakkaineri.com</p>
                                     </div>
                                 </div>
                                 
-                                <div class="flex items-start">
-                                    <div class="flex-shrink-0 bg-green-500 p-2 rounded-full mr-4">
-                                        <i class="fas fa-clock text-white"></i>
+                                <div class="contact-info-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-clock"></i>
                                     </div>
                                     <div>
-                                        <h4 class="text-green-800 font-medium mb-1">Opening Hours</h4>
-                                        <p class="text-green-700">Monday - Friday: 6:00 AM - 9:00 PM<br>Saturday - Sunday: 7:00 AM - 8:00 PM</p>
+                                        <h4>Opening Hours</h4>
+                                        <p>Monday - Friday: 6:00 AM - 9:00 PM<br>Saturday - Sunday: 7:00 AM - 8:00 PM</p>
                                     </div>
                                 </div>
                             </div>
                             
-                            <div class="mt-8">
-                                <h4 class="text-green-800 font-medium mb-4">Follow Us</h4>
-                                <div class="flex space-x-4">
-                                    <a href="#" class="bg-green-200 hover:bg-green-500 text-green-800 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                            <div class="social-media">
+                                <h4>Follow Us</h4>
+                                <div class="social-links">
+                                    <a href="#" class="social-link facebook">
                                         <i class="fab fa-facebook-f"></i>
                                     </a>
-                                    <a href="#" class="bg-green-200 hover:bg-green-500 text-green-800 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                    <a href="#" class="social-link instagram">
                                         <i class="fab fa-instagram"></i>
                                     </a>
-                                    <a href="https://www.linkedin.com/company/yakkaineri/posts/?feedView=all" class="bg-green-200 hover:bg-green-500 text-green-800 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                    <a href="https://www.linkedin.com/company/yakkaineri/posts/?feedView=all" class="social-link linkedin">
                                         <i class="fab fa-linkedin-in"></i>
                                     </a>
-                                    <a href="#" class="bg-green-200 hover:bg-green-500 text-green-800 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                    <a href="#" class="social-link whatsapp">
                                         <i class="fab fa-whatsapp"></i>
                                     </a>
                                 </div>
@@ -312,58 +330,74 @@
                     </div>
                 </div>
                 
-                <div class="mt-16 rounded-lg overflow-hidden fade-in">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3912.227032425596!2d76.9605293!3d11.0107535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba859da17a9d4cf%3A0xc6c6b176dc4cdb01!2sYakkai%20Neri!5e0!3m2!1sen!2sin!4v1724938474179!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" class="rounded-lg"></iframe>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3912.227032425596!2d76.9605293!3d11.0107535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba859da17a9d4cf%3A0xc6c6b176dc4cdb01!2sYakkai%20Neri!5e0!3m2!1sen!2sin!4v1724938474179!5m2!1sen!2sin" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold text-green-500 mb-4">Yakkai Neri</h3>
-                    <p class="text-gray-600">Transforming lives through authentic yoga practice since 2010. Join us on the path to holistic wellbeing.</p>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-section">
+                        <h3 class="footer-title">Yakkai Neri</h3>
+                        <p class="footer-text">Transforming lives through authentic yoga practice since 2010. Join us on the path to holistic wellbeing.</p>
+                    </div>
                 </div>
                 
-                <div>
-                    <h4 class="text-green-500 font-medium mb-4">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="index.html" class="text-gray-600 hover:text-green-500 transition duration-300">Home</a></li>
-                        <li><a href="wellness.html" class="text-gray-600 hover:text-green-500 transition duration-300">Wellness Programs</a></li>
-                        <li><a href="meet-the-trainer.html" class="text-gray-600 hover:text-green-500 transition duration-300">Meet The Trainer</a></li>
-                        <li><a href="index.html#contact" class="text-gray-600 hover:text-green-500 transition duration-300">Contact</a></li>
-                    </ul>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-section">
+                        <h4 class="footer-subtitle">Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="{{ url_for('home') }}">Home</a></li>
+                            <li><a href="{{ url_for('wellness_html') }}">Wellness Programs</a></li>
+                            <li><a href="{{ url_for('meet_trainer_html') }}">Meet The Trainer</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
                 </div>
                 
-                <div>
-                    <h4 class="text-green-500 font-medium mb-4">Contact Info</h4>
-                    <p class="text-gray-600">Coimbatore, Tamil Nadu</p>
-                    <p class="text-gray-600">Near Hindusthan College of Arts and Science</p>
-                    <p class="text-gray-600 mt-2">+91 98765 43210</p>
-                    <p class="text-gray-600">info@yakkaineri.com</p>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-section">
+                        <h4 class="footer-subtitle">Contact Info</h4>
+                        <p class="footer-text">Coimbatore, Tamil Nadu</p>
+                        <p class="footer-text">Near Hindusthan College of Arts and Science</p>
+                        <p class="footer-text">+91 98765 43210</p>
+                        <p class="footer-text">info@yakkaineri.com</p>
+                    </div>
                 </div>
                 
-                <div>
-                    <h4 class="text-green-500 font-medium mb-4">Newsletter</h4>
-                    <p class="text-gray-600 mb-4">Subscribe to receive updates on workshops, events and yoga tips.</p>
-                    <form class="flex">
-                        <input type="email" placeholder="Your email" class="px-4 py-2 bg-gray-100 text-gray-800 rounded-l-md focus:outline-none focus:ring-1 focus:ring-green-500 w-full">
-                        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-r-md transition duration-300">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-section">
+                        <h4 class="footer-subtitle">Newsletter</h4>
+                        <p class="footer-text">Subscribe to receive updates on workshops, events and yoga tips.</p>
+                        <form class="newsletter-form">
+                            <div class="input-group">
+                                <input type="email" placeholder="Your email" class="form-control">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
             
-            <div class="border-t border-gray-300 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2023 Yakkai Neri Yoga Academy. All rights reserved.</p>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-500 hover:text-green-500 transition duration-300">Privacy Policy</a>
-                    <a href="#" class="text-gray-500 hover:text-green-500 transition duration-300">Terms of Service</a>
-                    <a href="#" class="text-gray-500 hover:text-green-500 transition duration-300">Sitemap</a>
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="copyright">© 2023 Yakkai Neri Yoga Academy. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="footer-links footer-bottom-links">
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Sitemap</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
