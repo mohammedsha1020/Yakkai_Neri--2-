@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../../Yakkai_Neri/data"
+		}
+	],
+	"settings": {
+		"liveServer.settings.port": 5505,
+		"liveServer.settings.multiRootWorkspaceName": "Yakkai_Neri"
+	}
+}

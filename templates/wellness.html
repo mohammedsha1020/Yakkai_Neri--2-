@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness Programs - Yakkai Neri Yoga Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="js/script.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .hero-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .highlight-box {
+            background-color: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10B981;
+        }
+        .program-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-gray-50">
+     <!-- Navigation -->
+    <nav class="fixed w-full bg-white bg-opacity-90 z-50 border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="index.html" class="text-2xl font-bold text-green-500">Yakkai Neri</a>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="index.html" class="text-gray-700 hover:text-green-500 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Home</a>
+                            <div class="dropdown relative">
+                                <button class="text-green-500 px-3 py-2 rounded-md text-sm font-medium flex items-center focus:outline-none" aria-current="page">
+                                    Courses <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a href="wellness.html" class="dropdown-item">Wellness Programs</a>
+                                    <a href="therapy.html" class="dropdown-item">Therapy Programs</a>
+                                    <a href="women-seniors.html" class="dropdown-item">Women & Senior Programs</a>
+                                    <a href="professional.html" class="dropdown-item">Professional Training</a>
+                                    <a href="workshops.html" class="dropdown-item">Workshops</a>
+                                </div>
+                            </div>
+                            <a href="meet-the-trainer.html" class="text-gray-700 hover:text-green-500 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Meet The Trainer</a>
+                             <a href="index.html#contact" class="text-gray-700 hover:text-green-500 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Contact</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <a href="index.html#contact" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-300">Join Now</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-green-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden fixed inset-y-0 right-0 w-64 bg-black bg-opacity-95 z-50 border-l border-gray-800">
+            <div class="flex flex-col h-full p-4">
+                <div class="flex justify-end">
+                    <button id="close-mobile-menu" class="text-white hover:text-green-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex flex-col space-y-4 mt-8">
+                    <a href="index.html" class="text-white hover:text-green-500 px-3 py-2 rounded-md text-lg font-medium transition duration-300">Home</a>
+                    
+                    <!-- Mobile Courses Dropdown -->
+                    <div>
+                        <button id="mobile-courses-toggle" class="text-green-500 px-3 py-2 rounded-md text-lg font-medium flex items-center w-full justify-between">
+                            <span>Courses</span>
+                            <svg id="mobile-courses-chevron" class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="mobile-courses-menu" class="mobile-dropdown-menu">
+                            <a href="wellness.html" class="block text-white hover:text-green-500 px-3 py-2 rounded-md text-base font-medium transition duration-300">Wellness Programs</a>
+                            <a href="therapy.html" class="block text-white hover:text-green-500 px-3 py-2 rounded-md text-base font-medium transition duration-300">Therapy Programs</a>
+                            <a href="women-seniors.html" class="block text-white hover:text-green-500 px-3 py-2 rounded-md text-base font-medium transition duration-300">Women & Senior Programs</a>
+                            <a href="professional.html" class="block text-white hover:text-green-500 px-3 py-2 rounded-md text-base font-medium transition duration-300">Professional Training</a>
+                            <a href="workshops.html" class="block text-white hover:text-green-500 px-3 py-2 rounded-md text-base font-medium transition duration-300">Workshops</a>
+                        </div>
+                    </div>
+                    <a href="meet-the-trainer.html" class="text-white hover:text-green-500 px-3 py-2 rounded-md text-lg font-medium transition duration-300">Meet The Trainer</a>
+                    <a href="index.html#contact" class="text-white hover:text-green-500 px-3 py-2 rounded-md text-lg font-medium transition duration-300">Contact</a>
+                </div>
+                <div class="mt-auto mb-8">
+                    <a href="index.html#contact" class="block w-full bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-md text-center font-medium transition duration-300">Join Now</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-16">
+        <!-- Hero Section -->
+        <section class="hero-bg py-20 md:py-32">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-green-500 mb-6">Wellness & Lifestyle Programs</h1>
+                <p class="text-xl md:text-2xl text-white mb-8">For overall health, energy, and balance</p>
+            </div>
+        </section>
+
+        <!-- Intro Section -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center">
+                    <p class="text-lg text-gray-700">
+                        Our wellness programs are designed to help you achieve optimal health, mental clarity, and emotional balance through the transformative power of yoga.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programs Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-green-500 mb-2 text-center">Our Wellness Programs</h2>
+                <div class="w-20 h-1 bg-green-500 mx-auto mb-12"></div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Yoga for Adults & Young Adults -->
+                    <div class="program-card bg-white rounded-lg p-6 shadow-md">
+                        <h3 class="text-2xl font-bold text-green-500 mb-4">Yoga for Adults & Young Adults</h3>
+                        <p class="text-gray-700 font-medium mb-4">Stress relief, focus, and balanced lifestyle</p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>College Students: Stress relief, concentration, and resilience</li>
+                            <li>Adults as a Sport: Competitive yoga coaching for enthusiasts</li>
+                        </ul>
+                        <div class="mt-6 p-4 highlight-box rounded-md">
+                            <p class="text-gray-800 font-medium">Outcome: Balanced lifestyle, sharper focus, and improved mental clarity</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Yoga for Kids -->
+                    <div class="program-card bg-white rounded-lg p-6 shadow-md">
+                        <h3 class="text-2xl font-bold text-green-500 mb-4">Yoga for Kids</h3>
+                        <p class="text-gray-700 font-medium mb-4">Fun and engaging yoga for wellbeing, sport, and athletic training</p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Wellbeing Yoga – Building healthy habits and focus early</li>
+                            <li>Yoga as a Sport – Training for competitions</li>
+                            <li>Yoga for Sports – Flexibility and endurance for young athletes</li>
+                        </ul>
+                        <div class="mt-6 p-4 highlight-box rounded-md">
+                            <p class="text-gray-800 font-medium">Outcome: Healthy, confident, and balanced children</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Yoga for Educational Institutions -->
+                    <div class="program-card bg-white rounded-lg p-6 shadow-md">
+                        <h3 class="text-2xl font-bold text-green-500 mb-4">Yoga for Educational Institutions</h3>
+                        <p class="text-gray-700 font-medium mb-4">1-hour, 1-week, and 1-month programs to build focus, posture, and emotional balance</p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>1 Hour Awareness Session – Quick stress relief practices</li>
+                            <li>1 Week Program – Posture, breathing, and focus foundation</li>
+                            <li>1 Month Program – Intensive immersion into yoga, mindfulness, and emotional balance</li>
+                        </ul>
+                        <div class="mt-6 p-4 highlight-box rounded-md">
+                            <p class="text-gray-800 font-medium">Outcome: Confident, calm, and focused students with improved wellbeing</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Corporate Yoga & Wellness -->
+                    <div class="program-card bg-white rounded-lg p-6 shadow-md">
+                        <h3 class="text-2xl font-bold text-green-500 mb-4">Corporate Yoga & Wellness</h3>
+                        <p class="text-gray-700 font-medium mb-4">Stress management, posture care, and productivity-focused programs for employees</p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Posture correction & ergonomic care</li>
+                            <li>Stress management through breathwork & mindfulness</li>
+                            <li>Team self-assessment with HR wellness insights</li>
+                        </ul>
+                        <div class="mt-6 p-4 highlight-box rounded-md">
+                            <p class="text-gray-800 font-medium">Outcome: Better focus, reduced burnout, and a thriving workplace culture</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Overall Outcome -->
+                <div class="mt-16 bg-green-50 rounded-lg p-8 text-center">
+                    <h3 class="text-2xl font-bold text-green-500 mb-4">Overall Program Outcome</h3>
+                    <p class="text-xl text-gray-800 font-medium">Improved physical health, sharper mind, and emotional resilience</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-16 bg-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-bold text-white mb-6">Begin Your Wellness Journey Today</h2>
+                <p class="text-white text-xl mb-8 max-w-3xl mx-auto">Our certified yoga instructors will create a personalized program to help you achieve optimal health and balance</p>
+                <a href="index.html#contact" class="inline-block bg-white text-green-500 hover:bg-gray-100 px-8 py-3 rounded-md text-lg font-medium transition duration-300 transform hover:scale-105">
+                    Enroll Now
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white py-12 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-green-500 mb-4">Yakkai Neri</h3>
+                    <p class="text-gray-600">Transforming lives through authentic yoga practice since 2010. Join us on the path to holistic wellbeing.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-green-500 font-medium mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-600 hover:text-green-500 transition duration-300">Home</a></li>
+                        <li><a href="index.html#contact" class="text-gray-600 hover:text-green-500 transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-green-500 font-medium mb-4">Contact Info</h4>
+                    <p class="text-gray-600">123 Yoga Street, Wellness District</p>
+                    <p class="text-gray-600">Bengaluru, Karnataka 560001</p>
+                    <p class="text-gray-600 mt-2">+91 98765 43210</p>
+                    <p class="text-gray-600">info@yakkaineri.com</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 mt-12 pt-8 text-center">
+                <p class="text-gray-600">© 2023 Yakkai Neri Yoga Academy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMobileMenu = document.getElementById('close-mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu && closeMobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.remove('hidden');
+                });
+                
+                closeMobileMenu.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

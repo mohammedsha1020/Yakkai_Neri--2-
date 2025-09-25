@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corporate Yoga - Yakkai Neri</title>
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/corporate-yoga.css">
+</head>
+<body>
+<header class="hero">
+  <div class="hero-text">
+    <h1 class="main-title">CORPORATE WELLNESS - Yakkai Neri</h1>
+    <h2 class="subtitle-line">BLISSFULNESS</h2>
+    <div class="core-values">
+      <span>Breathe</span>
+      <span class="dot">•</span>
+      <span>Bend</span>
+      <span class="dot">•</span>
+      <span>Balance</span>
+    </div>
+    <a href="index.html#contact" class="home-button">Join Our Journey</a>
+  </div>
+</header>
+
+<div class="page-container">
+
+  <section class="card-container">
+    <div class="card" id="wellness-score">
+      <h2>Check Your Wellness Score</h2>
+      <p>Take our short assessment to evaluate stress levels, posture, and flexibility. Understand where you stand in your wellness journey!</p>
+
+      <div class="cta-button-group">
+        <a href="{{ url_for('wellness_form') }}" class="home-button green">I'm an Individual</a>
+        <a href="{{ url_for('corporate_onboard') }}" class="home-button green">I'm an HR / Team Lead</a>
+      </div>
+    </div>
+
+    <div class="card" id="demo-session">
+      <h2>1 Hour-Onsite Demo</h2>
+      <p>A power-packed onsite demo session to introduce your team to posture correction, de-stressing and breath awareness.</p>
+    </div>
+
+    <div class="card" id="trial-week">
+      <h2>1 Week Trial: De-Stress & Stretch</h2>
+      <p>A focused 7-day trial to experience posture improvement, stress relief, and full-body vitality.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Focus</th>
+              <th>Practice Flow</th>
+              <th>Posture of the Day</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Day">Day 1</td>
+              <td data-label="Focus">Body Awakening & Spine Activation</td>
+              <td data-label="Practice Flow">Centering breath, Sukshma Vyayama, Relaxation (AUM)</td>
+              <td data-label="Posture of the Day">Tadasana</td>
+            </tr>
+            <tr>
+              <td data-label="Day">Day 2</td>
+              <td data-label="Focus">Posture Correction & Shoulder Release</td>
+              <td data-label="Practice Flow">Hasta Uttanasana, Bhramari Pranayama</td>
+              <td data-label="Posture of the Day">Vrikshasana</td>
+            </tr>
+            <tr>
+              <td data-label="Day">Day 3</td>
+              <td data-label="Focus">Spine & Hip Mobility</td>
+              <td data-label="Practice Flow">Hip stretches, Butterfly, Body Scan</td>
+              <td data-label="Posture of the Day">Setu Bandhasana</td>
+            </tr>
+            <tr>
+              <td data-label="Day">Day 4</td>
+              <td data-label="Focus">Tech Tension Release</td>
+              <td data-label="Practice Flow">Bhujangasana, Shalabhasana, Twists</td>
+              <td data-label="Posture of the Day">Bhujangasana</td>
+            </tr>
+            <tr>
+              <td data-label="Day">Day 5</td>
+              <td data-label="Focus">Hamstring & Back Stretching</td>
+              <td data-label="Practice Flow">Forward bends, Prone twists</td>
+              <td data-label="Posture of the Day">Janu Sirsasana</td>
+            </tr>
+            <tr>
+              <td data-label="Day">Day 6</td>
+              <td data-label="Focus">Balance & Confidence Building</td>
+              <td data-label="Practice Flow">Tree prep, Leg drills</td>
+              <td data-label="Posture of the Day">Veerabadrasana</td>
+            </tr>
+            <tr>
+              <td data-label="Day">Day 7</td>
+              <td data-label="Focus">Integration & Posture Achievement</td>
+              <td data-label="Practice Flow">Flow review, Achieve-your-posture</td>
+              <td data-label="Posture of the Day">Final posture showcase</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" id="monthly-program">
+      <h2>1 Month Corporate Yoga Program</h2>
+      <p>A comprehensive 4-week wellness journey crafted for IT professionals to restore rhythm, strength and calm.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Week</th>
+              <th>Focus Area</th>
+              <th>Practices & Techniques</th>
+              <th>Expected Results</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Week">Week 1</td>
+              <td data-label="Focus Area">Emotional Upliftment & Stress Relief</td>
+              <td data-label="Practices & Techniques">Sukshma Vyayama, Bhramari, Tadasana, Yoga Nidra</td>
+              <td data-label="Expected Results">Less anxiety, better sleep, emotional stability</td>
+            </tr>
+            <tr>
+              <td data-label="Week">Week 2</td>
+              <td data-label="Focus Area">Digestive Health & Core Strength</td>
+              <td data-label="Practices & Techniques">Bhastrika, Kapalabhati, Twists, Naukasana</td>
+              <td data-label="Expected Results">Improved digestion, core strength, energy</td>
+            </tr>
+            <tr>
+              <td data-label="Week">Week 3</td>
+              <td data-label="Focus Area">Circadian Rhythm Alignment</td>
+              <td data-label="Practices & Techniques">Surya Namaskar, Chandra Bhedana, Forward bends</td>
+              <td data-label="Expected Results">Balanced sleep cycle, better rest</td>
+            </tr>
+            <tr>
+              <td data-label="Week">Week 4</td>
+              <td data-label="Focus Area">Holistic Well-being</td>
+              <td data-label="Practices & Techniques">Sitali Pranayama, Asana flow, Inner Balance Meditation</td>
+              <td data-label="Expected Results">Focus, long-term well-being, resilience</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="success-metrics" id="impact">
+    <h2>Our Impact</h2>
+    <p class="description">
+      Yakkai Neri's workplace wellness programs have transformed stress management, focus, and flexibility for thousands. Here's what our clients have experienced:
+    </p>
+    <div class="metrics-grid">
+      <div class="metric">
+        <h3>82%</h3>
+        <p>Reported Better Focus</p>
+      </div>
+      <div class="metric">
+        <h3>76%</h3>
+        <p>Lower Stress Levels</p>
+      </div>
+      <div class="metric">
+        <h3>1500+</h3>
+        <p>Employees Reached</p>
+      </div>
+      <div class="metric">
+        <h3>25+</h3>
+        <p>Corporate Clients</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonial-section">
+    <h2 class="testimonial-heading">What our clients say</h2>
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="testimonial-content">
+            <img src="{{ url_for('static', filename='images/person1.jpg') }}" alt="Client Photo" class="testimonial-photo" />
+            <div>
+              <p class="testimonial-text">"The 1-week trial transformed my posture and energy. Our whole team loved it!"</p>
+              <p class="testimonial-name">– Harish, Team Lead, XYZ</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="testimonial-content">
+            <img src="{{ url_for('static', filename='images/person2.jpg') }}" alt="Client Photo" class="testimonial-photo" />
+            <div>
+              <p class="testimonial-text">"The breathing practices helped reduce my anxiety. Highly recommend Yakkai Neri!"</p>
+              <p class="testimonial-name">– Rekha, HR Manager</p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="testimonial-content">
+            <img src="{{ url_for('static', filename='images/person3.jpg') }}" alt="Client Photo" class="testimonial-photo" />
+            <div>
+              <p class="testimonial-text">"The breathing practices helped reduce my anxiety. Highly recommend Yakkai Neri!"</p>
+              <p class="testimonial-name">– Demo, ABC, HR Manager</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </section>
+
+  <div class="wellness-form-section">
+    <div class="container">
+      <div class="progress-indicator">
+        Step <span id="progressText">1</span> of 3
+      </div>
+      <form action="{{ url_for('submit_wellness', company_code=company_code) }}" method="POST">
+
+        <input type="hidden" name="company_code" value="{{ company_code }}">
+
+        <div id="step1" class="form-step active" data-step="1"></div>
+          <div class="card">
+            <h2>Physical Health Assessment</h2>
+            <table class="assessment-table">
+              <tr>
+                <td class="question-text">1. Back pain due to sitting?</td>
+                <td class="options">
+                  <label><input type="radio" name="q1" value="1" required> Rarely</label>
+                  <label><input type="radio" name="q1" value="2"> Sometimes</label>
+                  <label><input type="radio" name="q1" value="3"> Often</label>
+                  <label><input type="radio" name="q1" value="4"> Always</label>
+                </td>
+              </tr>
+              <tr>
+                <td class="question-text">2. Neck/shoulder discomfort?</td>
+                <td class="options">
+                  <label><input type="radio" name="q2" value="1" required> Rarely</label>
+                  <label><input type="radio" name="q2" value="2"> Sometimes</label>
+                  <label><input type="radio" name="q2" value="3"> Often</label>
+                  <label><input type="radio" name="q2" value="4"> Always</label>
+                </td>
+              </tr>
+              <tr>
+                <td class="question-text">3. Hours without break?</td>
+                <td class="options">
+                  <label><input type="radio" name="q3" value="1" required> &lt; 1 hour</label>
+                  <label><input type="radio" name="q3" value="2"> 1-2 hours</label>
+                  <label><input type="radio" name="q3" value="3"> 2-3 hours</label>
+                  <label><input type="radio" name="q3" value="4"> &gt; 3 hours</label>
+                </td>
+              </tr>
+              <tr>
+                <td class="question-text">4. Average sleep per night?</td>
+                <td class="options">
+                  <label><input type="radio" name="q4" value="1" required> &lt; 4 hours</label>
+                  <label><input type="radio" name="q4" value="2"> 4-6 hours</label>
+                  <label><input type="radio" name="q4" value="3"> 6-8 hours</label>
+                  <label><input type="radio" name="q4" value="4"> &gt; 8 hours</label>
+                </td>
+              </tr>
+              <tr>
+                <td class="question-text">5. Wrist/hand pain from typing?</td>
+                <td class="options">
+                  <label><input type="radio" name="q5" value="1" required> Rarely</label>
+                  <label><input type="radio" name="q5" value="2"> Sometimes</label>
+                  <label><input type="radio" name="q5" value="3"> Often</label>
+                  <label><input type="radio" name="q5" value="4"> Always</label>
+                </td>
+              </tr>
+              <tr>
+                <td class="question-text">6. Screen breaks during work?</td>
+                <td class="options">
+                  <label><input type="radio" name="q6" value="1" required> Every hour</label>
+                  <label><input type="radio" name="q6" value="2"> Every 2-3 hours</label>
+                  <label><input type="radio" name="q6" value="3"> Once a day</label>
+                  <label><input type="radio" name="q6" value="4"> Almost never</label>
+                </td>
+              </tr>
+            </table>
+            <button type="button" class="next-button">Next</button>
+          </div>
+        </div>
+
+        <div id="step2" class="form-step" data-step="2"></div>
+          <div class="card">
+            <h2>Emotional Wellbeing Assessment</h2>
+            <table class="assessment-table">
+              <tr>
+                <td class="question-text">7. Morning energy?</td>
+                <td class="options">
+                  <label><input type="radio" name="q7" value="1" required> Very low</label>
+                  <label><input type="radio" name="q7" value="2"> Low</label>
+                  <label><input type="radio" name="q7" value="3"> Moderate</label>
+                  <label><input type="radio" name="q7" value="4"> High</label>
+                </td>
+              </tr>
+              <tr>
+                <td class="question-text">8. Afternoon energy?</td>
+                <td class="options">
+                  <label><input type="radio" name="q8" value="1" required> Very low</label>
+                  <label><input type="radio" name="q8" value="2"> Low</label>
+                  <label><input type="radio" name="q8" value="3"> Moderate</label>
+                  <label><input type="radio" name="q8" value="4"> High</label>
+                </td>
+              </tr>
+              <tr>
+                <td class="question-text">9. Deadline response?</td>
+                <td class="options">
+                  <label><input type="radio" name="q9" value="1" required> Overwhelmed</label>
+                  <label><input type="radio" name="q9" value="2"> Stressed but manageable</label>
+                  <label><input type="radio" name="q9" value="3"> Comfortable</label>
+                  <label><input type="radio" name="q9" value="4"> Calm and confident</label>
+                </td>
+              </tr>
+              <tr>
+                <td class="question-text">10. End of day mood?</td>
+                <td class="options">
+                  <label><input type="radio" name="q10" value="1" required> Exhausted</label>
+                  <label><input type="radio" name="q10" value="2"> Stressed</label>
+                  <label><input type="radio" name="q10" value="3"> Relaxed</label>
+                  <label><input type="radio" name="q10" value="4"> Energized</label>
+                </td>
+              </tr>
+              <tr>
+                <td class="question-text">11. Relaxation practices?</td>
+                <td class="options">
+                  <label><input type="radio" name="q11" value="1" required> Rarely</label>
+                  <label><input type="radio" name="q11" value="2"> Occasionally</label>
+                  <label><input type="radio" name="q11" value="3"> Often</label>
+                  <label><input type="radio" name="q11" value="4"> Always</label>
+                </td>
+              </tr>
+              <tr>
+                <td class="question-text">12. Mental clarity?</td>
+                <td class="options">
+                  <label><input type="radio" name="q12" value="1" required> Often cloudy</label>
+                  <label><input type="radio" name="q12" value="2"> Sometimes unclear</label>
+                  <label><input type="radio" name="q12" value="3"> Mostly clear</label>
+                  <label><input type="radio" name="q12" value="4"> Very sharp</label>
+                </td>
+              </tr>
+            </table>
+            <button type="button" class="next-button">Next</button>
+          </div>
+        </div>
+
+        <div id="step3" class="form-step" data-step="3"></div>
+          <div class="card">
+            <h2>Personal Information</h2>
+            <label style="display:block; text-align:left; margin-top:10px;">Name</label>
+            <input type="text" name="name" required>
+            <label style="display:block; text-align:left; margin-top:10px;">Mobile</label>
+            <input type="tel" name="mobile" pattern="^[6-9]\d{9}$" required>
+            <label style="display:block; text-align:left; margin-top:10px;">Email</label>
+            <input type="email" name="email" required>
+            <label style="display:block; text-align:left; margin-top:10px;">Designation</label>
+            <input type="text" name="designation">
+            <button type="submit" class="next-button" style="display:block; margin:20px auto;">Submit</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const swiper = new Swiper('.mySwiper', {
+      loop: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      autoplay: {
+        delay: 5000,
+      },
+    });
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="{{ url_for('static', filename='js/corporate-yoga.js') }}"></script>
+
+</body>
+</html>

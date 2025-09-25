@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yoga for Sport - Yakkai Neri</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { background: #f7f7f7; margin: 0; font-family: 'Segoe UI', sans-serif; }
+    .container { max-width: 900px; margin: 3rem auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 2rem; }
+    h1 { color: #2e3a59; }
+    .highlight { background: #c0ebc6; border-left: 6px solid #00ff26; padding: 1rem; margin: 2rem 0; font-weight: bold; color: #000000; }
+    .nav-links { display: flex; justify-content: space-between; margin-top: 2rem; }
+    .nav-links a { background: #00ff26; color: #fff; padding: 0.7rem 1.5rem; border-radius: 6px; text-decoration: none; transition: background 0.2s; }
+    .nav-links a:hover { background: #00ff26; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Yoga for Sport</h1>
+    <p>Yoga is a powerful tool for athletes, enhancing flexibility, strength, and mental focus. At Yakkai Neri, we integrate yoga into sports training to help athletes prevent injuries, recover faster, and gain a competitive edge in their field.</p>
+    <div class="photos" onclick="openLightbox('image/Champion-award.jpg')">
+      <img src="images/one.jpg" alt="Yoga Sport 1">
+      <img src="images/three.jpg" alt="Yoga Sport 2">
+    </div>
+    <div class="highlight">
+      How we differ: Our programs are sport-specific, designed in collaboration with coaches and physiotherapists, ensuring that yoga complements athletic training rather than being a generic add-on.
+    </div>
+
+    {% extends "base.html" %}
+{% block title %}Wellness Assessment Form{% endblock %}
+
+{% block content %}
+<div class="wellness-form-section">
+  <!-- Modern Progress Indicator -->
+  <div class="progress-container">
+    <div class="progress-step active" id="stepIndicator1">1</div>
+    <div class="progress-step" id="stepIndicator2">2</div>
+    <div class="progress-step" id="stepIndicator3">3</div>
+  </div>
+
+  <form id="wellnessForm" action="{{ url_for('submit_wellness', company_code=company_code) }}" method="POST">
+
+    <input type="hidden" name="company_code" value="{{ company_code if company_code else 'self' }}">
+
+
+    <!-- Step 1: Physical Health Assessment -->
+    <div id="step1" class="form-step">
+      <div class="form-card active">
+        <h2>Physical Health Assessment</h2>
+        
+        <!-- Question 1 -->
+        <div class="question-group">
+          <p class="question-text">1. Back pain due to sitting?</p>
+          <div class="options horizontal">
+            <label><input type="checkbox" name="q1" value="4" class="exclusive" onclick="selectOnlyOne(this)" required> Rarely</label>
+            <label><input type="checkbox" name="q1" value="3" class="exclusive" onclick="selectOnlyOne(this)"> Sometimes</label>
+            <label><input type="checkbox" name="q1" value="2" class="exclusive" onclick="selectOnlyOne(this)"> Often</label>
+            <label><input type="checkbox" name="q1" value="1" class="exclusive" onclick="selectOnlyOne(this)"> Always</label>
+          </div>
+        </div>
+        
+        <!-- Question 2 -->
+        <div class="question-group">
+          <p class="question-text">2. Neck/shoulder discomfort?</p>
+          <div class="options horizontal">
+            <label><input type="checkbox" name="q2" value="4" class="exclusive" onclick="selectOnlyOne(this)" required> Rarely</label>
+            <label><input type="checkbox" name="q2" value="3" class="exclusive" onclick="selectOnlyOne(this)"> Sometimes</label>
+            <label><input type="checkbox" name="q2" value="2" class="exclusive" onclick="selectOnlyOne(this)"> Often</label>
+            <label><input type="checkbox" name="q2" value="1" class="exclusive" onclick="selectOnlyOne(this)"> Always</label>
+          </div>
+        </div>
+        
+        <!-- Question 3 -->
+        <div class="question-group">
+          <p class="question-text">3. Hours without break?</p>
+          <div class="options horizontal">
+            <label><input type="checkbox" name="q3" value="4" class="exclusive" onclick="selectOnlyOne(this)" required> &lt; 1 hour</label>
+            <label><input type="checkbox" name="q3" value="3" class="exclusive" onclick="selectOnlyOne(this)"> 1-2 hours</label>
+            <label><input type="checkbox" name="q3" value="2" class="exclusive" onclick="selectOnlyOne(this)"> 2-3 hours</label>
+            <label><input type="checkbox" name="q3" value="1" class="exclusive" onclick="selectOnlyOne(this)"> &gt; 3 hours</label>
+          </div>
+        </div>
+        
+        <!-- Question 4 -->
+        <div class="question-group">
+          <p class="question-text">4. Average sleep per night?</p>
+          <div class="options horizontal">
+            <label><input type="checkbox" name="q4" value="1" class="exclusive" onclick="selectOnlyOne(this)" required> &lt; 4 hours</label>
+            <label><input type="checkbox" name="q4" value="3" class="exclusive" onclick="selectOnlyOne(this)"> 4-6 hours</label>
+            <label><input type="checkbox" name="q4" value="4" class="exclusive" onclick="selectOnlyOne(this)"> 6-8 hours</label>
+            <label><input type="checkbox" name="q4" value="1" class="exclusive" onclick="selectOnlyOne(this)"> &gt; 8 hours</label>
+          </div>
+        </div>
+        
+        <!-- Question 5 -->
+        <div class="question-group">
+          <p class="question-text">5. Wrist/hand pain from typing?</p>
+          <div class="options horizontal">
+            <label><input type="checkbox" name="q5" value="4" class="exclusive" onclick="selectOnlyOne(this)" required> Rarely</label>
+            <label><input type="checkbox" name="q5" value="3" class="exclusive" onclick="selectOnlyOne(this)"> Sometimes</label>
+            <label><input type="checkbox" name="q5" value="2" class="exclusive" onclick="selectOnlyOne(this)"> Often</label>
+            <label><input type="checkbox" name="q5" value="1" class="exclusive" onclick="selectOnlyOne(this)"> Always</label>
+          </div>
+        </div>
+        
+        <!-- Question 6 -->
+        <div class="question-group">
+          <p class="question-text">6. Screen breaks during work?</p>
+          <div class="options horizontal">
+            <label><input type="checkbox" name="q6" value="4" class="exclusive" onclick="selectOnlyOne(this)" required> Every hour</label>
+            <label><input type="checkbox" name="q6" value="3" class="exclusive" onclick="selectOnlyOne(this)"> Every 2-3 hours</label>
+            <label><input type="checkbox" name="q6" value="2" class="exclusive" onclick="selectOnlyOne(this)"> Once a day</label>
+            <label><input type="checkbox" name="q6" value="1" class="exclusive" onclick="selectOnlyOne(this)"> Almost never</label>
+          </div>
+        </div>
+        
+        <button type="button" class="next-button" onclick="goToStep(2)">Next</button>
+      </div>
+    </div>
+    
+    <!-- Step 2: Emotional Wellbeing Assessment -->
+    <div id="step2" class="form-step" style="display: none;">
+      <div class="form-card">
+        <h2>Emotional Wellbeing Assessment</h2>
+        
+        <!-- Question 7 -->
+        <div class="question-group">
+          <p class="question-text">7. Morning energy?</p>
+          <div class="options horizontal">
+            <label><input type="checkbox" name="q7" value="1" class="exclusive" onclick="selectOnlyOne(this)" required> Very low</label>
+            <label><input type="checkbox" name="q7" value="2" class="exclusive" onclick="selectOnlyOne(this)"> Low</label>
+            <label><input type="checkbox" name="q7" value="3" class="exclusive" onclick="selectOnlyOne(this)"> Moderate</label>
+            <label><input type="checkbox" name="q7" value="4" class="exclusive" onclick="selectOnlyOne(this)"> High</label>
+          </div>
+        </div>
+        
+        <!-- Question 8 -->
+        <div class="question-group">
+          <p class="question-text">8. Afternoon energy?</p>
+          <div class="options horizontal">
+            <label><input type="checkbox" name="q8" value="1" class="exclusive" onclick="selectOnlyOne(this)" required> Very low</label>
+            <label><input type="checkbox" name="q8" value="2" class="exclusive" onclick="selectOnlyOne(this)"> Low</label>
+            <label><input type="checkbox" name="q8" value="3" class="exclusive" onclick="selectOnlyOne(this)"> Moderate</label>
+            <label><input type="checkbox" name="q8" value="4" class="exclusive" onclick="selectOnlyOne(this)"> High</label>
+          </div>
+        </div>
+        
+        <!-- Question 9 -->
+        <div class="question-group">
+          <p class="question-text">9. Deadline response?</p>
+          <div class="options horizontal">
+            <label><input type="checkbox" name="q9" value="1" class="exclusive" onclick="selectOnlyOne(this)" required> Overwhelmed</label>
+            <label><input type="checkbox" name="q9" value="2" class="exclusive" onclick="selectOnlyOne(this)"> Stressed but manageable</label>
+            <label><input type="checkbox" name="q9" value="3" class="exclusive" onclick="selectOnlyOne(this)"> Comfortable</label>
+            <label><input type="checkbox" name="q9" value="4" class="exclusive" onclick="selectOnlyOne(this)"> Calm and confident</label>
+          </div>
+        </div>
+        
+        <!-- Question 10 -->
+        <div class="question-group">
+          <p class="question-text">10. End of day mood?</p>
+          <div class="options horizontal">
+            <label><input type="checkbox" name="q10" value="1" class="exclusive" onclick="selectOnlyOne(this)" required> Exhausted</label>
+            <label><input type="checkbox" name="q10" value="2" class="exclusive" onclick="selectOnlyOne(this)"> Stressed</label>
+            <label><input type="checkbox" name="q10" value="3" class="exclusive" onclick="selectOnlyOne(this)"> Relaxed</label>
+            <label><input type="checkbox" name="q10" value="4" class="exclusive" onclick="selectOnlyOne(this)"> Energized</label>
+          </div>
+        </div>
+        
+        <!-- Question 11 -->
+        <div class="question-group">
+          <p class="question-text">11. Relaxation practices?</p>
+          <div class="options horizontal">
+            <label><input type="checkbox" name="q11" value="1" class="exclusive" onclick="selectOnlyOne(this)" required> Rarely</label>
+            <label><input type="checkbox" name="q11" value="2" class="exclusive" onclick="selectOnlyOne(this)"> Occasionally</label>
+            <label><input type="checkbox" name="q11" value="3" class="exclusive" onclick="selectOnlyOne(this)"> Often</label>
+            <label><input type="checkbox" name="q11" value="4" class="exclusive" onclick="selectOnlyOne(this)"> Always</label>
+          </div>
+        </div>
+        
+        <!-- Question 12 -->
+        <div class="question-group">
+          <p class="question-text">12. Mental clarity?</p>
+          <div class="options horizontal">
+            <label><input type="checkbox" name="q12" value="1" class="exclusive" onclick="selectOnlyOne(this)" required> Often cloudy</label>
+            <label><input type="checkbox" name="q12" value="2" class="exclusive" onclick="selectOnlyOne(this)"> Sometimes unclear</label>
+            <label><input type="checkbox" name="q12" value="3" class="exclusive" onclick="selectOnlyOne(this)"> Mostly clear</label>
+            <label><input type="checkbox" name="q12" value="4" class="exclusive" onclick="selectOnlyOne(this)"> Very sharp</label>
+          </div>
+        </div>
+        
+        <button type="button" class="next-button" onclick="goToStep(3)">Next</button>
+      </div>
+    </div>
+    
+    <!-- Step 3: Personal Information -->
+    <div id="step3" class="form-step" style="display: none;">
+      <div class="form-card">
+        <h2>Personal Information</h2>
+        
+        <label>Name</label>
+        <input type="text" name="name" required>
+        
+        <label>Mobile</label>
+        <input type="tel" name="mobile" pattern="^[6-9]\d{9}$" required>
+        
+        <label>Email</label>
+        <input type="email" name="email" required>
+        
+        <label>Designation</label>
+        <input type="text" name="designation">
+        
+        <button type="submit" class="next-button" id="submitBtn">Submit</button>
+
+      </div>
+    </div>
+  </form>
+</div>
+
+<!--CSS -->
+<style>
+
+/* Container & Card */
+.wellness-form-section {
+  max-width: 650px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.form-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.form-card.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Horizontally aligned checkboxes (desktop view) */
+.options.horizontal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Progress Indicator */
+.progress-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  position: relative;
+  margin-top: 30px;
+}
+
+.progress-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 4px;
+  background: #ddd;
+  z-index: 0;
+}
+
+.progress-step {
+  width: 40px;
+  height: 40px;
+  background: #ddd;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
+  color: #fff;
+  z-index: 1;
+  position: relative;
+}
+
+.progress-step.active {
+  background: #4caf50;
+}
+
+/* Question Groups */
+.question-group {
+  margin-bottom: 1.75rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.question-group:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.question-text {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Form Inputs for Personal Info */
+input[type="text"],
+input[type="tel"],
+input[type="email"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Buttons */
+.next-button {
+  background: #4caf50;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+  transition: background 0.3s;
+}
+
+.next-button:hover {
+  background: #388e3c;
+}
+
+/* H2 styling */
+h2 {
+  text-align: center;
+  color: green;
+}
+
+/* Responsive adjustments for mobile view */
+@media (max-width: 768px) {
+  /* Checkboxes: Display as a 2x2 grid */
+  .options.horizontal {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  /* Keep progress indicator horizontally aligned */
+  .progress-container {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .progress-container::before {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    right: 10%;
+    height: 4px;
+    background: #ddd;
+    z-index: 0;
+  }
+  
+  /* Adjust spacing between progress steps */
+  .progress-step {
+    margin: 0 10px;
+  }
+}
+</style>
+
+<!-- JavaScript -->
+<script>
+  document.getElementById("submitBtn").addEventListener("click", function(event) {
+    event.preventDefault();  // Prevent default behavior first
+    document.getElementById("wellnessForm").submit();  // Then submit the form
+});
+
+  function goToStep(step) {
+      var formSteps = document.querySelectorAll('.form-step');
+      formSteps.forEach(function(el) {
+          el.style.display = 'none';
+          var card = el.querySelector('.form-card');
+          if (card) card.classList.remove('active');
+      });
+
+      var activeStep = document.getElementById('step' + step);
+      activeStep.style.display = 'block';
+      setTimeout(function() {
+          var activeCard = activeStep.querySelector('.form-card');
+          if (activeCard) activeCard.classList.add('active');
+      }, 50);
+
+      for (var i = 1; i <= 3; i++) {
+          var indicator = document.getElementById('stepIndicator' + i);
+          if (indicator) {
+              if (i <= step) {
+                  indicator.classList.add('active');
+              } else {
+                  indicator.classList.remove('active');
+              }
+          }
+      }
+
+      var section = document.querySelector('.wellness-form-section');
+      if (section) {
+          window.scrollTo({ top: section.offsetTop, behavior: 'smooth' });
+      }
+  }
+  window.goToStep = goToStep;
+  
+  const checkboxes = document.querySelectorAll('.exclusive');
+      checkboxes.forEach(chk => {
+        chk.addEventListener('change', function() {
+          if (this.checked) {
+            checkboxes.forEach(other => {
+              if(other !== this) other.checked = false;
+            });
+          }
+        });
+      });
+</script>
+
+{% endblock %}
+
+   
+  </div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block title %}Wellness Assessment Form{% endblock %}
+
+{% block content %}
+<div class="wellness-form-section">
+  <div class="progress-container">
+    <div class="progress-step active" id="stepIndicator1">1</div>
+    <div class="progress-step" id="stepIndicator2">2</div>
+    <div class="progress-step" id="stepIndicator3">3</div>
+  </div>
+
+  <form id="wellnessForm" action="{{ url_for('submit_wellness', company_code=company_code) }}" method="POST">
+    <input type="hidden" name="company_code" value="{{ company_code if company_code else 'self' }}">
+
+    <div id="step1" class="form-step">
+      <div class="form-card active">
+        <h2>Physical Health Assessment</h2>
+        
+        <div class="question-group">
+          <p class="question-text">1. Back pain due to sitting?</p>
+          <div class="options horizontal">
+            <label><input type="radio" name="q1" value="4" required> Rarely</label>
+            <label><input type="radio" name="q1" value="3"> Sometimes</label>
+            <label><input type="radio" name="q1" value="2"> Often</label>
+            <label><input type="radio" name="q1" value="1"> Always</label>
+          </div>
+        </div>
+        
+        <div class="question-group">
+          <p class="question-text">2. Neck/shoulder discomfort?</p>
+          <div class="options horizontal">
+            <label><input type="radio" name="q2" value="4" required> Rarely</label>
+            <label><input type="radio" name="q2" value="3"> Sometimes</label>
+            <label><input type="radio" name="q2" value="2"> Often</label>
+            <label><input type="radio" name="q2" value="1"> Always</label>
+          </div>
+        </div>
+        
+        <div class="question-group">
+          <p class="question-text">3. Hours without break?</p>
+          <div class="options horizontal">
+            <label><input type="radio" name="q3" value="4" required> &lt; 1 hour</label>
+            <label><input type="radio" name="q3" value="3"> 1-2 hours</label>
+            <label><input type="radio" name="q3" value="2"> 2-3 hours</label>
+            <label><input type="radio" name="q3" value="1"> &gt; 3 hours</label>
+          </div>
+        </div>
+        
+        <div class="question-group">
+          <p class="question-text">4. Average sleep per night?</p>
+          <div class="options horizontal">
+            <label><input type="radio" name="q4" value="1" required> &lt; 4 hours</label>
+            <label><input type="radio" name="q4" value="3"> 4-6 hours</label>
+            <label><input type="radio" name="q4" value="4"> 6-8 hours</label>
+            <label><input type="radio" name="q4" value="1"> &gt; 8 hours</label>
+          </div>
+        </div>
+        
+        <div class="question-group">
+          <p class="question-text">5. Wrist/hand pain from typing?</p>
+          <div class="options horizontal">
+            <label><input type="radio" name="q5" value="4" required> Rarely</label>
+            <label><input type="radio" name="q5" value="3"> Sometimes</label>
+            <label><input type="radio" name="q5" value="2"> Often</label>
+            <label><input type="radio" name="q5" value="1"> Always</label>
+          </div>
+        </div>
+        
+        <div class="question-group">
+          <p class="question-text">6. Screen breaks during work?</p>
+          <div class="options horizontal">
+            <label><input type="radio" name="q6" value="4" required> Every hour</label>
+            <label><input type="radio" name="q6" value="3"> Every 2-3 hours</label>
+            <label><input type="radio" name="q6" value="2"> Once a day</label>
+            <label><input type="radio" name="q6" value="1"> Almost never</label>
+          </div>
+        </div>
+        
+        <button type="button" class="next-button" onclick="goToStep(2)">Next</button>
+      </div>
+    </div>
+    
+    <div id="step2" class="form-step" style="display: none;">
+      <div class="form-card">
+        <h2>Emotional Wellbeing Assessment</h2>
+        
+        <div class="question-group">
+          <p class="question-text">7. Morning energy?</p>
+          <div class="options horizontal">
+            <label><input type="radio" name="q7" value="1" required> Very low</label>
+            <label><input type="radio" name="q7" value="2"> Low</label>
+            <label><input type="radio" name="q7" value="3"> Moderate</label>
+            <label><input type="radio" name="q7" value="4"> High</label>
+          </div>
+        </div>
+        
+        <div class="question-group">
+          <p class="question-text">8. Afternoon energy?</p>
+          <div class="options horizontal">
+            <label><input type="radio" name="q8" value="1" required> Very low</label>
+            <label><input type="radio" name="q8" value="2"> Low</label>
+            <label><input type="radio" name="q8" value="3"> Moderate</label>
+            <label><input type="radio" name="q8" value="4"> High</label>
+          </div>
+        </div>
+        
+        <div class="question-group">
+          <p class="question-text">9. Deadline response?</p>
+          <div class="options horizontal">
+            <label><input type="radio" name="q9" value="1" required> Overwhelmed</label>
+            <label><input type="radio" name="q9" value="2"> Stressed but manageable</label>
+            <label><input type="radio" name="q9" value="3"> Comfortable</label>
+            <label><input type="radio" name="q9" value="4"> Calm and confident</label>
+          </div>
+        </div>
+        
+        <div class="question-group">
+          <p class="question-text">10. End of day mood?</p>
+          <div class="options horizontal">
+            <label><input type="radio" name="q10" value="1" required> Exhausted</label>
+            <label><input type="radio" name="q10" value="2"> Stressed</label>
+            <label><input type="radio" name="q10" value="3"> Relaxed</label>
+            <label><input type="radio" name="q10" value="4"> Energized</label>
+          </div>
+        </div>
+        
+        <div class="question-group">
+          <p class="question-text">11. Relaxation practices?</p>
+          <div class="options horizontal">
+            <label><input type="radio" name="q11" value="1" required> Rarely</label>
+            <label><input type="radio" name="q11" value="2"> Occasionally</label>
+            <label><input type="radio" name="q11" value="3"> Often</label>
+            <label><input type="radio" name="q11" value="4"> Always</label>
+          </div>
+        </div>
+        
+        <div class="question-group">
+          <p class="question-text">12. Mental clarity?</p>
+          <div class="options horizontal">
+            <label><input type="radio" name="q12" value="1" required> Often cloudy</label>
+            <label><input type="radio" name="q12" value="2"> Sometimes unclear</label>
+            <label><input type="radio" name="q12" value="3"> Mostly clear</label>
+            <label><input type="radio" name="q12" value="4"> Very sharp</label>
+          </div>
+        </div>
+        
+        <button type="button" class="next-button" onclick="goToStep(3)">Next</button>
+      </div>
+    </div>
+    
+    <div id="step3" class="form-step" style="display: none;">
+      <div class="form-card">
+        <h2>Personal Information</h2>
+        
+        <label>Name</label>
+        <input type="text" name="name" required>
+        
+        <label>Mobile</label>
+        <input type="tel" name="mobile" pattern="^[6-9]\d{9}$" required>
+        
+        <label>Email</label>
+        <input type="email" name="email" required>
+        
+        <label>Designation</label>
+        <input type="text" name="designation">
+        
+        <button type="submit" class="next-button" id="submitBtn">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+{% endblock %}

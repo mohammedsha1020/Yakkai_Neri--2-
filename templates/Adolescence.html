@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yakkai Neri Yoga Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="js/script.js"></script>
+</head>
+<body>
+  <nav class="fixed w-full bg-white bg-opacity-90 z-50 border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="index.html" class="text-2xl font-bold text-green-500">Yakkai Neri</a>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="index.html" class="text-gray-700 hover:text-green-500 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Home</a>
+                            <div class="dropdown relative">
+                                <button class="text-green-500 px-3 py-2 rounded-md text-sm font-medium flex items-center focus:outline-none" aria-current="page">
+                                    Courses <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a href="wellness.html" class="dropdown-item">Wellness Programs</a>
+                                    <a href="therapy.html" class="dropdown-item">Therapy Programs</a>
+                                    <a href="women-seniors.html" class="dropdown-item">Women & Senior Programs</a>
+                                    <a href="professional.html" class="dropdown-item">Professional Training</a>
+                                    <a href="workshops.html" class="dropdown-item">Workshops</a>
+                                </div>
+                            </div>
+                            <a href="meet-the-trainer.html" class="text-gray-700 hover:text-green-500 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Meet The Trainer</a>
+                            <a href="index.html#contact" class="text-gray-700 hover:text-green-500 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Contact</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <a href="#contact" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-300">Join Now</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-green-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden fixed inset-y-0 right-0 w-64 bg-black bg-opacity-95 z-50 border-l border-gray-800">
+            <div class="flex flex-col h-full p-4">
+                <div class="flex justify-end">
+                    <button id="close-mobile-menu" class="text-white hover:text-green-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex flex-col space-y-4 mt-8">
+                    <a href="index.html" class="text-white hover:text-green-500 px-3 py-2 rounded-md text-lg font-medium transition duration-300">Home</a>
+                    
+                    <!-- Mobile Courses Dropdown -->
+                    <div>
+                        <button id="mobile-courses-toggle" class="text-green-500 px-3 py-2 rounded-md text-lg font-medium flex items-center w-full justify-between">
+                            <span>Courses</span>
+                            <svg id="mobile-courses-chevron" class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="mobile-courses-menu" class="mobile-dropdown-menu">
+                            <a href="wellness.html" class="block text-white hover:text-green-500 px-3 py-2 rounded-md text-base font-medium transition duration-300">Wellness Programs</a>
+                            <a href="therapy.html" class="block text-white hover:text-green-500 px-3 py-2 rounded-md text-base font-medium transition duration-300">Therapy Programs</a>
+                            <a href="women-seniors.html" class="block text-white hover:text-green-500 px-3 py-2 rounded-md text-base font-medium transition duration-300">Women & Senior Programs</a>
+                            <a href="professional.html" class="block text-white hover:text-green-500 px-3 py-2 rounded-md text-base font-medium transition duration-300">Professional Training</a>
+                            <a href="workshops.html" class="block text-white hover:text-green-500 px-3 py-2 rounded-md text-base font-medium transition duration-300">Workshops</a>
+                        </div>
+                    </div>
+                    <a href="meet-the-trainer.html" class="text-white hover:text-green-500 px-3 py-2 rounded-md text-lg font-medium transition duration-300">Meet The Trainer</a>
+                    <a href="index.html#contact" class="text-white hover:text-green-500 px-3 py-2 rounded-md text-lg font-medium transition duration-300">Contact</a>
+                </div>
+                <div class="mt-auto mb-8">
+                    <a href="#contact" class="block w-full bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-md text-center font-medium transition duration-300">Join Now</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+   <main class="card-container">
+    <div class="card coming-soon-card">
+      <h1 style="font-size: 52px; color: #2e7d32;">COMING SOON</h1>
+      <p style="margin: 20px 0; font-size: 20px;">
+        Our Yoga courses are being crafted with utmost care.<br/>
+        Stay tuned for updates and new offerings!
+      </p>
+      <a href="index.html" class="home-button green">← Back to Home</a>
+    </div>
+  </main>
+</body>
+
+</html>

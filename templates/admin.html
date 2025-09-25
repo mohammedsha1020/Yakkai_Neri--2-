@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Yakkai Neri Yoga Academy</title>
+    <link rel="stylesheet" href="css/admin-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-card">
+            <div class="login-header ">
+                <h1>Yakkai Neri Admin</h1>
+                <p>Manage Your Yoga Programs</p>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username">
+                        <i class="fas fa-user"></i>
+                        Username
+                    </label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i>
+                        Password
+                    </label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </button>
+                <div id="loginError" class="error-message hidden">
+                    Invalid credentials. Please try again.
+                </div>
+            </form>
+        </div>
+    </div>
+   
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="admin-container hidden">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="header-left">
+                <h1><i class="fas fa-tachometer-alt"></i> Admin Dashboard</h1>
+            </div>
+            <div class="header-right">
+                <span class="welcome-text">Welcome, Admin</span>
+                <button id="logoutBtn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="overview">
+                    <i class="fas fa-chart-line"></i>
+                    Overview
+                </a>
+                <a href="#" class="nav-item" data-section="programs">
+                    <i class="fas fa-book"></i>
+                    Manage Programs
+                </a>
+                <a href="#" class="nav-item" data-section="pages">
+                    <i class="fas fa-file-alt"></i>
+                    Program Pages
+                </a>
+                <a href="#" class="nav-item" data-section="website-control">
+                    <i class="fas fa-cogs"></i>
+                    Website Control
+                </a>
+                <a href="#" class="nav-item" data-section="settings">
+                    <i class="fas fa-cog"></i>
+                    Settings
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Overview Section -->
+            <div id="overview" class="content-section active">
+                <div class="section-header">
+                    <h2>Dashboard Overview</h2>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Programs</h3>
+                            <p class="stat-number">8</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Pages Created</h3>
+                            <p class="stat-number">10</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Active Users</h3>
+                            <p class="stat-number">156</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Last Updated</h3>
+                            <p class="stat-number">Today</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="action-buttons">
+                        <button class="action-btn" onclick="switchSection('programs')">
+                            <i class="fas fa-plus"></i>
+                            Add New Program
+                        </button>
+                        <button class="action-btn" onclick="switchSection('pages')">
+                            <i class="fas fa-edit"></i>
+                            Edit Pages
+                        </button>
+                        <button class="action-btn" onclick="window.open('index.html', '_blank')">
+                            <i class="fas fa-eye"></i>
+                            View Website
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Programs Management Section -->
+            <div id="programs" class="content-section">
+                <div class="section-header">
+                    <h2>Manage Programs</h2>
+                    <button id="addProgramBtn" class="add-btn">
+                        <i class="fas fa-plus"></i>
+                        Add New Program
+                    </button>
+                </div>
+                
+                <!-- Program Tabs -->
+                <div class="program-tabs">
+                    <button class="tab-btn active" data-tab="all">
+                        <i class="fas fa-list"></i>
+                        All Programs
+                        <span class="tab-count" id="all-count">8</span>
+                    </button>
+                    <button class="tab-btn" data-tab="active">
+                        <i class="fas fa-check-circle"></i>
+                        Active
+                        <span class="tab-count" id="active-count">7</span>
+                    </button>
+                    <button class="tab-btn" data-tab="draft">
+                        <i class="fas fa-edit"></i>
+                        Draft
+                        <span class="tab-count" id="draft-count">1</span>
+                    </button>
+                    <button class="tab-btn" data-tab="inactive">
+                        <i class="fas fa-pause-circle"></i>
+                        Inactive
+                        <span class="tab-count" id="inactive-count">0</span>
+                    </button>
+                </div>
+                
+                <!-- Program Filter and Search -->
+                <div class="program-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="programSearch" placeholder="Search programs...">
+                    </div>
+                    <div class="view-options">
+                        <button class="view-btn active" data-view="grid">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="view-btn" data-view="list">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="programs-grid" id="programsContainer">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+                
+                <!-- Empty state -->
+                <div id="emptyState" class="empty-state" style="display: none;">
+                    <i class="fas fa-folder-open"></i>
+                    <h3>No Programs Found</h3>
+                    <p>No programs match your current filter. Try adjusting your search or create a new program.</p>
+                    <button class="add-btn" onclick="window.adminPanel.openProgramModal()">
+                        <i class="fas fa-plus"></i>
+                        Add Your First Program
+                    </button>
+                </div>
+            </div>
+
+            <!-- Program Pages Section -->
+            <div id="pages" class="content-section">
+                <div class="section-header">
+                    <h2>Program Pages Management</h2>
+                    <div class="header-actions">
+                        <button id="addPageBtn" class="add-btn">
+                            <i class="fas fa-plus"></i>
+                            Add New Page
+                        </button>
+                        <button id="bulkEditBtn" class="add-btn secondary">
+                            <i class="fas fa-edit"></i>
+                            Bulk Edit
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Page Tabs -->
+                <div class="page-tabs">
+                    <button class="tab-btn active" data-page-tab="all">
+                        <i class="fas fa-file-alt"></i>
+                        All Pages
+                        <span class="tab-count" id="pages-all-count">10</span>
+                    </button>
+                    <button class="tab-btn" data-page-tab="published">
+                        <i class="fas fa-check-circle"></i>
+                        Published
+                        <span class="tab-count" id="pages-published-count">10</span>
+                    </button>
+                    <button class="tab-btn" data-page-tab="draft">
+                        <i class="fas fa-edit"></i>
+                        Draft
+                        <span class="tab-count" id="pages-draft-count">0</span>
+                    </button>
+                </div>
+                
+                <!-- Page Search -->
+                <div class="page-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="pageSearch" placeholder="Search pages by title or content...">
+                    </div>
+                    <div class="page-view-options">
+                        <button class="view-btn active" data-page-view="cards">
+                            <i class="fas fa-th-large"></i>
+                        </button>
+                        <button class="view-btn" data-page-view="list">
+                            <i class="fas fa-list"></i>
+                        </button>
+                        <button class="view-btn" data-page-view="table">
+                            <i class="fas fa-table"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="pages-container" id="pagesContainer">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settings" class="content-section">
+                <div class="section-header">
+                    <h2>Settings</h2>
+                </div>
+                
+                <div class="settings-grid">
+                    <div class="setting-card">
+                        <h3><i class="fas fa-lock"></i> Change Password</h3>
+                        <p>Update your admin password</p>
+                        <button class="setting-btn">Change Password</button>
+                    </div>
+                    
+                    <div class="setting-card">
+                        <h3><i class="fas fa-download"></i> Backup Data</h3>
+                        <p>Download backup of all program data</p>
+                        <button class="setting-btn">Download Backup</button>
+                    </div>
+                    
+                    <div class="setting-card">
+                        <h3><i class="fas fa-upload"></i> Import Data</h3>
+                        <p>Import program data from file</p>
+                        <button class="setting-btn">Import Data</button>
+                    </div>
+                    
+                    <div class="setting-card">
+                        <h3><i class="fas fa-sync"></i> Reset Cache</h3>
+                        <p>Clear all cached data</p>
+                        <button class="setting-btn">Clear Cache</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Program Edit Modal -->
+    <div id="programModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Edit Program</h3>
+                <button class="close-modal" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="programForm" class="modal-form">
+                <div class="form-group">
+                    <label for="programTitle">Program Title</label>
+                    <input type="text" id="programTitle" name="title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="programIcon">Icon Class</label>
+                    <input type="text" id="programIcon" name="icon" placeholder="fas fa-medal" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="programDescription">Short Description</label>
+                    <textarea id="programDescription" name="description" rows="3" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="programContent">Detailed Content</label>
+                    <textarea id="programContent" name="content" rows="8" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="programHighlight">What Makes Us Different</label>
+                    <textarea id="programHighlight" name="highlight" rows="4" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="programStatus">Status</label>
+                    <select id="programStatus" name="status" required>
+                        <option value="active">Active</option>
+                        <option value="draft">Draft</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" id="cancelEdit">Cancel</button>
+                    <button type="submit" class="save-btn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Page Edit Modal -->
+    <div id="pageModal" class="modal hidden">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3 id="pageModalTitle">Edit Page Content</h3>
+                <div class="modal-header-actions">
+                    <button class="toggle-preview-btn" id="togglePreview">
+                        <i class="fas fa-eye"></i>
+                        Preview
+                    </button>
+                    <button class="close-modal" id="closePageModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Markdown Toolbar -->
+            <div class="markdown-toolbar">
+                <div class="toolbar-group">
+                    <button type="button" class="toolbar-btn" data-action="bold" title="Bold (Ctrl+B)">
+                        <i class="fas fa-bold"></i>
+                    </button>
+                    <button type="button" class="toolbar-btn" data-action="italic" title="Italic (Ctrl+I)">
+                        <i class="fas fa-italic"></i>
+                    </button>
+                    <button type="button" class="toolbar-btn" data-action="underline" title="Underline (Ctrl+U)">
+                        <i class="fas fa-underline"></i>
+                    </button>
+                </div>
+                <div class="toolbar-group">
+                    <button type="button" class="toolbar-btn" data-action="heading1" title="Heading 1">
+                        <strong>H1</strong>
+                    </button>
+                    <button type="button" class="toolbar-btn" data-action="heading2" title="Heading 2">
+                        <strong>H2</strong>
+                    </button>
+                    <button type="button" class="toolbar-btn" data-action="heading3" title="Heading 3">
+                        <strong>H3</strong>
+                    </button>
+                </div>
+                <div class="toolbar-group">
+                    <button type="button" class="toolbar-btn" data-action="list" title="Bullet List">
+                        <i class="fas fa-list-ul"></i>
+                    </button>
+                    <button type="button" class="toolbar-btn" data-action="numlist" title="Numbered List">
+                        <i class="fas fa-list-ol"></i>
+                    </button>
+                    <button type="button" class="toolbar-btn" data-action="quote" title="Quote">
+                        <i class="fas fa-quote-left"></i>
+                    </button>
+                </div>
+                <div class="toolbar-group">
+                    <button type="button" class="toolbar-btn" data-action="link" title="Insert Link">
+                        <i class="fas fa-link"></i>
+                    </button>
+                    <button type="button" class="toolbar-btn" data-action="image" title="Insert Image">
+                        <i class="fas fa-image"></i>
+                    </button>
+                    <button type="button" class="toolbar-btn" data-action="code" title="Code Block">
+                        <i class="fas fa-code"></i>
+                    </button>
+                </div>
+                <div class="toolbar-group">
+                    <button type="button" class="toolbar-btn" data-action="undo" title="Undo (Ctrl+Z)">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                    <button type="button" class="toolbar-btn" data-action="redo" title="Redo (Ctrl+Y)">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <form id="pageForm" class="modal-form">
+                <div class="form-group">
+                    <label for="pageTitle">Page Title</label>
+                    <input type="text" id="pageTitle" name="title" required>
+                </div>
+                
+                <div class="editor-container">
+                    <!-- Editor Tabs -->
+                    <div class="editor-tabs">
+                        <button type="button" class="editor-tab active" data-tab="edit">
+                            <i class="fas fa-edit"></i>
+                            Edit
+                        </button>
+                        <button type="button" class="editor-tab" data-tab="preview">
+                            <i class="fas fa-eye"></i>
+                            Preview
+                        </button>
+                        <button type="button" class="editor-tab" data-tab="split">
+                            <i class="fas fa-columns"></i>
+                            Split View
+                        </button>
+                    </div>
+                    
+                    <!-- Editor Content -->
+                    <div class="editor-content">
+                        <div class="editor-pane" id="editorPane">
+                            <div class="form-group">
+                                <label for="pageContent">Page Content (Markdown supported)</label>
+                                <textarea id="pageContent" name="content" rows="20" required 
+                                    placeholder="# Main Heading
+## Sub Heading
+                                    
+Write your content here...
+
+### Features
+- Bullet point 1
+- Bullet point 2
+- Bullet point 3
+
+### Important Note
+> This is a quote or important note
+
+**Bold text** and *italic text* are supported.
+
+[Link text](http://example.com)
+
+```
+Code block example
+```"></textarea>
+                            </div>
+                            
+                            <!-- Markdown Help -->
+                            <div class="markdown-help">
+                                <button type="button" class="help-toggle" id="markdownHelpToggle">
+                                    <i class="fas fa-question-circle"></i>
+                                    Markdown Help
+                                </button>
+                                <div class="help-content" id="markdownHelp">
+                                    <div class="help-grid">
+                                        <div class="help-item">
+                                            <strong># Heading 1</strong>
+                                            <span>Large heading</span>
+                                        </div>
+                                        <div class="help-item">
+                                            <strong>## Heading 2</strong>
+                                            <span>Medium heading</span>
+                                        </div>
+                                        <div class="help-item">
+                                            <strong>**Bold text**</strong>
+                                            <span>Bold formatting</span>
+                                        </div>
+                                        <div class="help-item">
+                                            <strong>*Italic text*</strong>
+                                            <span>Italic formatting</span>
+                                        </div>
+                                        <div class="help-item">
+                                            <strong>- List item</strong>
+                                            <span>Bullet list</span>
+                                        </div>
+                                        <div class="help-item">
+                                            <strong>1. Numbered</strong>
+                                            <span>Numbered list</span>
+                                        </div>
+                                        <div class="help-item">
+                                            <strong>[Link](url)</strong>
+                                            <span>Hyperlink</span>
+                                        </div>
+                                        <div class="help-item">
+                                            <strong>> Quote</strong>
+                                            <span>Blockquote</span>
+                                        </div>
+                                        <div class="help-item">
+                                            <strong>```code```</strong>
+                                            <span>Code block</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="preview-pane" id="previewPane" style="display: none;">
+                            <div class="preview-header">
+                                <h4><i class="fas fa-eye"></i> Live Preview</h4>
+                                <button type="button" class="refresh-preview" id="refreshPreview">
+                                    <i class="fas fa-sync"></i>
+                                    Refresh
+                                </button>
+                            </div>
+                            <div class="preview-content" id="previewContent">
+                                <p class="preview-placeholder">Preview will appear here...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" id="cancelPageEdit">Cancel</button>
+                    <button type="button" class="save-btn secondary" id="saveDraft">Save as Draft</button>
+                    <button type="submit" class="save-btn">Publish Page</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Website Control Section -->
+    <div id="website-control" class="content-section">
+        <div class="section-header">
+            <h2><i class="fas fa-cogs"></i> Website Control</h2>
+            <p>Complete control over your website content and assets</p>
+        </div>
+
+        <div class="control-grid">
+            <!-- Image Management -->
+            <div class="control-section">
+                <h3><i class="fas fa-images"></i> Image Management</h3>
+                
+                <div class="image-upload-area">
+                    <div class="upload-box" onclick="document.getElementById('imageUpload').click()">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Click to upload images</p>
+                        <small>Support: JPG, PNG, GIF (Max: 5MB)</small>
+                    </div>
+                    <input type="file" id="imageUpload" multiple accept="image/*" style="display: none;">
+                </div>
+
+                <div class="image-gallery" id="imageGallery">
+                    <!-- Images will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Page Management -->
+            <div class="control-section">
+                <h3><i class="fas fa-file-alt"></i> Page Management</h3>
+                
+                <div class="page-list">
+                    <div class="page-item">
+                        <span>index.html</span>
+                        <div class="page-actions">
+                            <button class="btn-small btn-primary" onclick="editPage('index')">Edit</button>
+                            <button class="btn-small btn-secondary" onclick="previewPage('index')">Preview</button>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <span>Courses.html</span>
+                        <div class="page-actions">
+                            <button class="btn-small btn-primary" onclick="editPage('courses')">Edit</button>
+                            <button class="btn-small btn-secondary" onclick="previewPage('courses')">Preview</button>
+                        </div>
+                    </div>
+                    <div class="page-item">
+                        <span>contact.html</span>
+                        <div class="page-actions">
+                            <button class="btn-small btn-primary" onclick="editPage('contact')">Edit</button>
+                            <button class="btn-small btn-secondary" onclick="previewPage('contact')">Preview</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-success" onclick="createNewPage()">
+                    <i class="fas fa-plus"></i> Create New Page
+                </button>
+            </div>
+
+            <!-- Content Synchronization -->
+            <div class="control-section">
+                <h3><i class="fas fa-sync-alt"></i> Sync Control</h3>
+                
+                <div class="sync-status">
+                    <div class="status-item">
+                        <span>Programs Data:</span>
+                        <span class="status-badge success" id="programsStatus">Up to date</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Website Pages:</span>
+                        <span class="status-badge success" id="pagesStatus">Synced</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Images & Assets:</span>
+                        <span class="status-badge success" id="assetsStatus">Synced</span>
+                    </div>
+                </div>
+
+                <div class="sync-actions">
+                    <button class="btn btn-primary" onclick="syncWebsite()">
+                        <i class="fas fa-sync-alt"></i> Full Sync
+                    </button>
+                    <button class="btn btn-secondary" onclick="exportWebsite()">
+                        <i class="fas fa-download"></i> Export Website
+                    </button>
+                    <button class="btn btn-warning" onclick="backupWebsite()">
+                        <i class="fas fa-archive"></i> Create Backup
+                    </button>
+                </div>
+            </div>
+
+            <!-- Advanced Settings -->
+            <div class="control-section">
+                <h3><i class="fas fa-sliders-h"></i> Advanced Settings</h3>
+                
+                <div class="settings-group">
+                    <label>
+                        <input type="checkbox" id="autoSync" checked>
+                        Auto-sync changes
+                    </label>
+                    <label>
+                        <input type="checkbox" id="backupBeforeSync">
+                        Backup before sync
+                    </label>
+                    <label>
+                        <input type="checkbox" id="optimizeImages" checked>
+                        Optimize uploaded images
+                    </label>
+                </div>
+
+                <div class="cache-control">
+                    <button class="btn btn-outline" onclick="clearCache()">
+                        <i class="fas fa-trash"></i> Clear Cache
+                    </button>
+                    <button class="btn btn-outline" onclick="refreshData()">
+                        <i class="fas fa-refresh"></i> Refresh Data
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin-script.js"></script>
+</body>
+</html>
