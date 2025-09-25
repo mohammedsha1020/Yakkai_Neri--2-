@@ -1,0 +1,66 @@
+/* Custom styles specifically for index.html */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- Dropdown Menu Fix for Tailwind Navbar --- */
+.dropdown-menu {
+    display: none; /* Hide the menu by default */
+    position: absolute;
+    background-color: white;
+    min-width: 220px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 100;
+    border-radius: 0.375rem;
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+}
+
+/* Show the menu when hovering over the parent .dropdown element */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1.5rem;
+    font-weight: 400;
+    color: #374151; /* Dark gray text */
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+
+.dropdown-item:hover {
+    background-color: #f3f4f6; /* Light gray on hover */
+    color: #10B981; /* Green text on hover */
+}
+
+/* Styles for the mobile dropdown menu */
+.mobile-dropdown-menu {
+    display: none;
+    padding-left: 1.5rem;
+}
+
+.mobile-dropdown-menu.show {
+    display: block;
+}
+
+.rotate-180 {
+    transform: rotate(180deg);
+}
+
+
+/* --- Animation on Scroll --- */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

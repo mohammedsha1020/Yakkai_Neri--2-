@@ -54,6 +54,37 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  // Handle form submission
+  const form = document.querySelector('form[action*="submit_wellness"]');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      console.log('Form submission initiated');
+      
+      // Check if all required questions are answered
+      let allAnswered = true;
+      for (let i = 1; i <= 12; i++) {
+        if (!document.querySelector(`input[name="q${i}"]:checked`)) {
+          allAnswered = false;
+          console.log(`Question ${i} not answered`);
+          break;
+        }
+      }
+      
+      // Check required personal info fields
+      const name = document.querySelector('input[name="name"]').value.trim();
+      const mobile = document.querySelector('input[name="mobile"]').value.trim();
+      const email = document.querySelector('input[name="email"]').value.trim();
+      
+      if (!allAnswered || !name || !mobile || !email) {
+        e.preventDefault();
+        alert('Please complete all required fields and answer all questions before submitting.');
+        return false;
+      }
+      
+      console.log('Form validation passed, submitting...');
+    });
+  }
+
   // --- SWIPER JS INITIALIZATION FOR TESTIMONIALS ---
   const swiper = new Swiper('.mySwiper', {
     loop: true,

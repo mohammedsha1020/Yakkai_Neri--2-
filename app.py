@@ -3,12 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-# --- NEW CONFIGURATION FOR MYSQL ---
-# Replace 'root' and 'your_password' with your actual WAMP server credentials.
-# The default password for WAMP is often blank.
-# Replace 'yakkai_neri_db' with the name you gave your database in phpMyAdmin.
-# The format is 'mysql+pymysql://username:password@server_address/database_name'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/yakkai_neri_db'
+# --- CONFIGURATION FOR SQLITE ---
+# Using SQLite database for local development
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///corporate_wellness.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # -----------------------------------
 
@@ -74,28 +71,37 @@ def corporate_onboard():
 # Route to handle form submission for the wellness assessment
 @app.route("/submit_wellness/<company_code>", methods=["POST"])
 def submit_wellness(company_code):
-    data = WellnessSubmission(
-        company_code=company_code,
-        q1=request.form.get("q1"),
-        q2=request.form.get("q2"),
-        q3=request.form.get("q3"),
-        q4=request.form.get("q4"),
-        q5=request.form.get("q5"),
-        q6=request.form.get("q6"),
-        q7=request.form.get("q7"),
-        q8=request.form.get("q8"),
-        q9=request.form.get("q9"),
-        q10=request.form.get("q10"),
-        q11=request.form.get("q11"),
-        q12=request.form.get("q12"),
-        name=request.form.get("name"),
-        mobile=request.form.get("mobile"),
-        email=request.form.get("email"),
-        designation=request.form.get("designation")
-    )
-    db.session.add(data)
-    db.session.commit()
-    return redirect(url_for('submission_success'))
+    try:
+        print(f"Form submission received for company_code: {company_code}")
+        print(f"Form data: {dict(request.form)}")
+        
+        data = WellnessSubmission(
+            company_code=company_code,
+            q1=request.form.get("q1"),
+            q2=request.form.get("q2"),
+            q3=request.form.get("q3"),
+            q4=request.form.get("q4"),
+            q5=request.form.get("q5"),
+            q6=request.form.get("q6"),
+            q7=request.form.get("q7"),
+            q8=request.form.get("q8"),
+            q9=request.form.get("q9"),
+            q10=request.form.get("q10"),
+            q11=request.form.get("q11"),
+            q12=request.form.get("q12"),
+            name=request.form.get("name"),
+            mobile=request.form.get("mobile"),
+            email=request.form.get("email"),
+            designation=request.form.get("designation")
+        )
+        db.session.add(data)
+        db.session.commit()
+        print("Data saved successfully")
+        return redirect(url_for('submission_success'))
+    except Exception as e:
+        print(f"Error submitting form: {e}")
+        db.session.rollback()
+        return f"An error occurred: {e}", 500
 
 # Route for a successful submission message
 @app.route("/submission_success")
