@@ -285,6 +285,35 @@ def meet_trainer_html():
 def contact_html():
     return render_template("contact.html")
 
+# Missing routes for specialty pages
+@app.route("/yoga-as-sport.html")
+def yoga_sport_html():
+    return render_template("yoga-as-sport.html")
+
+@app.route("/yoga-for-sport.html")
+def yoga_for_sport_html():
+    return render_template("yoga-for-sport.html")
+
+@app.route("/women-wellness.html")
+def women_wellness_html():
+    return render_template("Women-Wellness.html")
+
+@app.route("/prenatal-postnatal.html")
+def prenatal_postnatal_html():
+    return render_template("Prenatal & Postnatal.html")
+
+@app.route("/adolescence.html")
+def adolescence_html():
+    return render_template("Adolescence.html")
+
+@app.route("/tech-supported-yoga.html")
+def tech_yoga_html():
+    return render_template("Tech-supported Yoga.html")
+
+@app.route("/corporate-yoga.html")
+def corporate_yoga_html():
+    return render_template("corporate-yoga.html")
+
 # Catch-all route for missing static files to prevent 404s
 @app.errorhandler(404)
 def not_found_error(error):

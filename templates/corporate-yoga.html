@@ -6,10 +6,74 @@
   <title>Corporate Yoga - Yakkai Neri</title>
   
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/corporate-yoga.css') }}">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="{{ url_for('home') }}" class="logo">Yakkai Neri</a>
+            
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle active">
+                        Courses <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="{{ url_for('wellness_html') }}" class="dropdown-item">Wellness Programs</a>
+                        <a href="{{ url_for('therapy_html') }}" class="dropdown-item">Therapy Programs</a>
+                        <a href="{{ url_for('women_seniors_html') }}" class="dropdown-item">Women & Senior Programs</a>
+                        <a href="{{ url_for('professional_html') }}" class="dropdown-item">Professional Training</a>
+                        <a href="{{ url_for('workshops_html') }}" class="dropdown-item">Workshops</a>
+                    </div>
+                </li>
+                <li><a href="{{ url_for('meet_trainer_html') }}">Meet The Trainer</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            
+            <a href="#contact" class="btn btn-primary">Join Now</a>
+            
+            <button class="mobile-menu-button" id="mobile-menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu">
+            <div class="mobile-menu-header">
+                <button id="close-mobile-menu" class="mobile-menu-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="mobile-nav-menu">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                
+                <!-- Mobile Courses Dropdown -->
+                <li class="mobile-dropdown">
+                    <button id="mobile-courses-toggle" class="mobile-dropdown-toggle active">
+                        <span>Courses</span>
+                        <i id="mobile-courses-chevron" class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="mobile-courses-menu" class="mobile-dropdown-menu">
+                        <a href="{{ url_for('wellness_html') }}">Wellness Programs</a>
+                        <a href="{{ url_for('therapy_html') }}">Therapy Programs</a>
+                        <a href="{{ url_for('women_seniors_html') }}">Women & Senior Programs</a>
+                        <a href="{{ url_for('professional_html') }}">Professional Training</a>
+                        <a href="{{ url_for('workshops_html') }}">Workshops</a>
+                    </div>
+                </li>
+                <li><a href="{{ url_for('meet_trainer_html') }}">Meet The Trainer</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-cta">
+                <a href="#contact" class="btn btn-primary btn-block">Join Now</a>
+            </div>
+        </div>
+    </nav>
+    
 <header class="hero">
   <div class="hero-text">
     <h1 class="main-title">CORPORATE WELLNESS - Yakkai Neri</h1>
@@ -21,7 +85,7 @@
       <span class="dot">•</span>
       <span>Balance</span>
     </div>
-    <a href="index.html#contact" class="home-button">Join Our Journey</a>
+    <a href="{{ url_for('home', _anchor='contact') }}" class="home-button">Join Our Journey</a>
   </div>
 </header>
 
@@ -382,6 +446,47 @@
 
   // Multi-step form functionality handled by corporate-yoga.js
   // No need for duplicate JavaScript here
+</script>
+
+<script>
+// Mobile menu functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeMobileMenu = document.getElementById('close-mobile-menu');
+    const mobileCoursesToggle = document.getElementById('mobile-courses-toggle');
+    const mobileCoursesMenu = document.getElementById('mobile-courses-menu');
+    const mobileCoursesChevron = document.getElementById('mobile-courses-chevron');
+    
+    if (mobileMenuButton && mobileMenu && closeMobileMenu) {
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMobileMenu.addEventListener('click', function() {
+            mobileMenu.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close mobile menu when clicking outside
+        mobileMenu.addEventListener('click', function(e) {
+            if (e.target === mobileMenu) {
+                mobileMenu.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
+    
+    // Mobile courses dropdown
+    if (mobileCoursesToggle && mobileCoursesMenu && mobileCoursesChevron) {
+        mobileCoursesToggle.addEventListener('click', function() {
+            const isOpen = mobileCoursesMenu.style.display === 'block';
+            mobileCoursesMenu.style.display = isOpen ? 'none' : 'block';
+            mobileCoursesChevron.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+        });
+    }
+});
 </script>
 
 <script src="{{ url_for('static', filename='js/corporate-yoga.js') }}"></script>
